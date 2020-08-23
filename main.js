@@ -59,8 +59,10 @@ function menu(id) {
                 if (document.getElementById(`${res}-widget-area`).querySelectorAll(`#${res}-title`)) {
                     var y = document.getElementById(`${res}-widget-area`).querySelector(`#${res}-widget`);
                     if (y.innerHTML == "") {
+                        x.style.display = "flex";
                         y.innerHTML = x.outerHTML;
                     } else {
+                        x.style.display = "flex";
                         y.innerHTML += x.outerHTML;
                     }
                 }
