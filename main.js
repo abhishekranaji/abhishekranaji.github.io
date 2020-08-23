@@ -41,35 +41,64 @@ const pickr = Pickr.create({
 });
 
 
+const newLocal = {"color1" : [{"type":"color-widget", "value": "xyz"}]};
 function menu(id) {
-    var id = "#"+id;
-    var x = document.getElementsByClassName("menu-window");
-    var len = x.length;
-    var i;
-    for (i=0; i<len; i++) {
-        if (x[i].querySelectorAll(id).length == 1) {
-            var y = x[i].querySelectorAll('#widget');
-            console.log(y);
-            var y_len = y.length;
-            
-            for (var j=0; j<y_len; j++) {
-                if (y[j].style.display === "none") {
-                    y[j].style.display = "block";
-                } else {
-                    y[j].style.display = "none";
-                }
+    var previouskey;
+    var info =  [];
+    var id = id;
+    var res = id.split("-")[0];
+    Object.entries(newLocal).forEach(([keys]) => {
+    for (const [key, value] of Object.entries(newLocal[`${keys}`][0])) {
+        if (`${key}` === "type") {
+            var x = document.getElementById(`${value}`);
+            console.log(x);
+            x.classList.add(`${keys}`);
+            if (document.getElementById(`${res}-widget-area`).querySelectorAll(`#${res}-title`)) {
+                var y = document.getElementById(`${res}-widget-area`).querySelector(`#${res}-widget`);
+                if (y.innerHTML == "") {
+                    y.innerHTML = x.outerHTML;
+                  } else {
+                      y.innerHTML += x.outerHTML;
+                  }
+            }
+            // Resiezer
+            var resizer = document.createElement('div');
+            resizer.className = "info-resizer1";
+            var z = document.getElementById(`${res}-resize`);
+            z.appendChild(resizer);
+            resizer.addEventListener('mousedown', initDrag, false);
+            var startX, startY, startHeight;
+            function initDrag(e) {
+                startY = e.clientY;
+                startHeight = parseInt(document.defaultView.getComputedStyle(z).height, 10);
+                document.documentElement.addEventListener('mousemove', doDrag, false);
+                document.documentElement.addEventListener('mouseup', stopDrag, false);
+            }
+
+            function doDrag(e) {
+                z.style.height = (startHeight + e.clientY - startY) + 'px';
+                y.style.height = (startHeight + e.clientY - startY)-28 + 'px';
+                y.style.maxHeight = (startHeight + e.clientY - startY)-28 + 'px';
+            }
+
+            function stopDrag(e) {
+                document.documentElement.removeEventListener('mousemove', doDrag, false);
+                document.documentElement.removeEventListener('mouseup', stopDrag, false);
             }
         }
-    }
+      }} );  
 }
-function info(id) {
-    var id = "#"+id;
-    var x = document.getElementsByClassName("menu-window");
+function info_button(id) {
+    var id = id;
+    var res = id.split("-");
+    var y_id = "#"+ res[0];
+    var x = document.getElementsByClassName("right-nav-window");
+    var title = y_id+"-title";
     var len = x.length;
     var i;
     for (i=0; i<len; i++) {
-        if (x[i].querySelectorAll(id).length == 1) {
-            var y = x[i].querySelectorAll('#title');
+        if (x[i].querySelectorAll(`#${id}`).length == 1) {
+            var y = x[i].querySelectorAll(title);
             var z = x[i].querySelectorAll('#widget');
             var y_len = y.length;
             var z_len = z.length;

@@ -60,9 +60,12 @@
     outline: none;
 }
 .align-center {
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: top;
+    /* width: 50%; */
     display: block;
-    padding-top: 8px;
+    padding-top: 4.5px;
 }
 button:focus-visible{
     outline: none;
@@ -82,10 +85,10 @@ button:focus-visible{
 .card-window {
     width: 135px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 2px 1px #00000029;
+    box-shadow: 0px 6px 8px  rgba(0, 0, 0, 0.449);
     border-radius: 4px;
     opacity: 1;
-    margin-bottom: 10px;
+    padding-top: 9px;
 }
 .menu-window {
     margin-left: -148px;
@@ -93,7 +96,6 @@ button:focus-visible{
 }
 
 h1 {
-    margin-top: 10px;
     font-family: Do Hyeon;
     font-size: 15px;
     font-weight: 500;
@@ -101,8 +103,21 @@ h1 {
     color: #666666;
     opacity: 1;
     text-align: left;
-    margin-bottom: -7px;
-    margin-left: 5px;
+    margin: 0px;
+    padding-left: 8px;
+    padding-bottom: 9px;
+
+}
+h2 {
+    font-family: Do Hyeon;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    color: #666666;
+    opacity: 1;
+    text-align: left;
+    margin: 0px;
+    padding-left: 8px;
 }
 .any-info {
     font-family: Alata;
@@ -111,18 +126,83 @@ h1 {
     color: #666666;
     opacity: 1;
     text-align: left;
-    margin-left: 5px;
+    margin: 0px;
+    padding-left: 8px;
+    margin-bottom: 9px;
 }
 
 
 /* Picker CSS */
 .pickr {
     position: absolute;
-    content: "";
     top: 8px;
-    right: -12px;
-    width: 22px;
-    height: 22px;
     border-radius: .15em;
     overflow: hidden !important;
 }
+
+/* shadows */
+.shadow-5 {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+                0 2px 2px rgba(0,0,0,0.12), 
+                0 4px 4px rgba(0,0,0,0.12), 
+                0 8px 8px rgba(0,0,0,0.12),
+                0 16px 16px rgba(0,0,0,0.12);
+}
+.shadow-shorter {
+    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+                0 2px 2px rgba(0,0,0,0.11), 
+                0 4px 4px rgba(0,0,0,0.11), 
+                0 6px 8px rgba(0,0,0,0.11),
+                0 8px 16px rgba(0,0,0,0.11);
+  }
+  
+.shadow-longer {
+    box-shadow: 0 2px 1px rgba(0,0,0,0.09), 
+                0 4px 2px rgba(0,0,0,0.09), 
+                0 8px 4px rgba(0,0,0,0.09), 
+                0 16px 8px rgba(0,0,0,0.09),
+                0 32px 16px rgba(0,0,0,0.09);
+  }
+
+.shadow-4 {
+    box-shadow:  0 0 1px 1px rgba(0,0,0,0.12), 
+    0 0 2px 2px rgba(0,0,0,0.12), 
+    0 0 4px 4px rgba(0,0,0,0.12), 
+    0 0 8px 8px rgba(0,0,0,0.12),
+    0 0 16px 16px rgba(0,0,0,0.12);
+
+}
+
+/* Scroll bar */
+::-webkit-scrollbar {
+    width: 4px;
+    padding-bottom: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #C9C9C9; 
+    border-radius: 4px;
+
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #575757; 
+    border-radius: 4px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(0, 0, 0); 
+  }
+  
+
+/* resize css */
+
+::-webkit-resizer {
+    border-top: 20px solid #d4d4d4;
+    position: absolute;
+  }
+
+  .info-resizer1 { width: 22px; height: 1.5px; bottom: 0; background: black; position:absolute;cursor: se-resize; left: 16px; }

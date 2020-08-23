@@ -2,20 +2,64 @@
 <html lang="en" style="height: 100%">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, height=device-height; initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link href='https://fonts.googleapis.com/css?family=Do+Hyeon' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Alata' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
     <title>Document</title>
 </head>
-<body style="padding:0; margin: 0; width:100%; height:100%;background-color: black;">
-    <div style="display: flex; flex-direction: column; width: 100%; height:100%; background-color: white;">
-        <div id="top_area" style="height: 5%; background-color: orange;"></div>
+<body style="padding:0; margin: 0; width:100%; height:100%; background-color: #F6F6F6;">
+    <div style="display: flex; flex-direction: column; width: 100%; height:100%; abackground-color: white;">
+        <div id="top_area" style="height: 5%; abackground-color: orange;"></div>
         <div id="center_column" style=" flex: 1; display: flex; height: 100%">
-            <div id="left_area" style="width: 5%; background-color: blue;"></div>
+            <div id="left_area" style="width: 37px; abackground-color: blue;"></div>
             <div id="center_area" style="flex: 1;">
-            
+                <div style="background: #d4d4d4 0% 0% no-repeat padding-box;
+                border-radius: 10px;
+                opacity: 1; height: 95%; width: 100%;z-index: 1000;" class="shadow-4"></div>
             </div>
-            <div id="right_area" style="width: 5%; background-color: grey;"></div>
+            <div id="right_area" style="width: 56px;z-index: 400;">
+                <div class="right-nav-window"  style="display:flex; flex-direction: column;">
+                    <div id="info-resize" style="display: flex; max-height: 100%; position: relative; min-height: 28px;">
+                        <div id="info-widget-area" style="flex-direction: row; margin-left: -140px;">
+                            <div id="info-title" class="card-window" style="display: none;" role="window">
+                                <h1 id="info-heading" onclick="menu(this.id)" >TITLE</h1>
+                            </div>
+                            <div id="info-widget" style="overflow-y: scroll;max-height: 260px"></div>
+                        </div>
+                        <div style="float: 1; display:flex; flex-direction: column; margin-left: auto;">
+                            <button id="info-button" onclick="info_button(this.id)" class="side-nav-button">
+                                <img src="assests\info-con.svg" class="align-center" style="margin: auto;"></img></button>
+                        </div>
+                    </div>
+                    <div style="display: flex; max-height: 100%; margin-top:10px;">
+                        <div id="mat-widget-area" style="flex-direction: row; margin-left: -140px;">
+                            <div id="mat-title" class="card-window" style="display: none;" role="window">
+                                <h1 id="mat-heading" onclick="menu(this.id)" >TITLE</h1>
+                            </div>
+                            <div id="mat-widget" style="overflow-y: scroll;"></div>
+                        </div>
+                        <div style="float: 1; display:flex; flex-direction: row; margin-left: auto;"><button id="mat-button" onclick="info_button(this.id)" class="side-nav-button"><img src="assests\info-con.svg" class="align-center" style="margin: auto;"></img></button></div>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
-        <div id="bottom_area" style="height: 5%; background-color: bisque;"></div>
+        <div id="bottom_area" style="height: 5%; abackground-color: bisque;"></div>
+    </div>
+    <div id="color-widget">
+        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
+            <div id="color-widget-left-area" style="width: 101px;" >
+                <h2>COLOR</h2>
+                <p class="any-info">(information if any)</p>
+            </div>
+            <div id="color-widget-right-area">
+                <div class="pickr"></div>
+            </div>
+        </div>
     </div>
 </body>
+<script src="main.js"></script>
 </html>
