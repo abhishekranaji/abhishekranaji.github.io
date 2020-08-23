@@ -48,28 +48,42 @@ function menu(id) {
     var id = id;
     var res = id.split("-")[0];
     Object.entries(newLocal).forEach(([keys]) => {
+        previouskey = keys;
     for (const [key, value] of Object.entries(newLocal[`${keys}`][0])) {
-        console.log([`${keys}`])
         if (document.getElementById(`${res}-widget-area`).querySelector(`.${keys}`)) {
 
         } else {
             if (`${key}` === "type") {
-                var x = document.getElementById(`${value}`);
-                x.classList.add(`${keys}`);
+                var x = document.getElementsByClassName(`${value}`);
                 if (document.getElementById(`${res}-widget-area`).querySelectorAll(`#${res}-title`)) {
                     var y = document.getElementById(`${res}-widget-area`).querySelector(`#${res}-widget`);
-                    if (y.innerHTML == "") {
-                        x.style.display = "flex";
-                        y.innerHTML = x.outerHTML;
-                    } else {
-                        x.style.display = "flex";
-                        y.innerHTML += x.outerHTML;
-                    }
+                    // if (y.innerHTML == "") {
+                    //     console.log("testing")
+                    //     x.style.display = "flex";
+                    //     document.getElementById(`${value}`).className += (` ${keys}`);
+                    //     y.innerHTML += x.outerHTML;
+                    //     document.getElementById(`${value}`).classList.remove(`${keys}`);
+                    //     // console.log(document.getElementById(`${value}`));
+                    //     x.style.display = "none";
+                    // }
+                    // } else {
+                    //     
+                    // }
+                    console.log(x[0].outerHTML);
+                    x[0].style.display = "flex";
+                    x[0].id = previouskey;
+                    y.innerHTML += x[0].outerHTML;
+                    console.log(x);
+                    // x.classList.remove(previouskey);
+                    x[0].style.display = "none";
                 }
+                // document.getElementById(`${value}`).classList.remove(`${keys}`);
+                
                 // color widget 
                 if (`${value}` == "color-widget") {
                     document.getElementById(`${res}-widget-area`)
                 }
+                
                 // Resiezer
                 var resizer = document.createElement('div');
                 resizer.className = "info-resizer1";
@@ -98,7 +112,7 @@ function menu(id) {
         }
       }} );  
 }
-function info_button(id) {
+function nav_button(id) {
     var id = id;
     var res = id.split("-");
     var y_id = "#"+ res[0];
@@ -109,7 +123,8 @@ function info_button(id) {
     for (i=0; i<len; i++) {
         if (x[i].querySelectorAll(`#${id}`).length == 1) {
             var y = x[i].querySelectorAll(title);
-            var z = x[i].querySelectorAll('#widget');
+            var z = x[i].querySelectorAll('.widget');
+            console.log(z)
             var y_len = y.length;
             var z_len = z.length;
             for (var j=0; j<z_len; j++) {
@@ -128,3 +143,6 @@ function info_button(id) {
         }
     }
 }
+
+
+// INTENSITY //

@@ -27,10 +27,23 @@
                             <div id="info-title" class="card-window" style="display: none;" role="window">
                                 <h1 id="info-heading" onclick="menu(this.id)" >TITLE</h1>
                             </div>
-                            <div id="info-widget" style="overflow-y: scroll;max-height: 260px"></div>
+                            <div id="info-widget" style="overflow-y: scroll;max-height: 260px">
+                                <div id= "csacds" class="intensity-widget" style="display: flex;">
+                                    <div class= "card-window" style="display:flex; flex-direction:column; margin-top: 4px;">
+                                        <div id="intensity-widget-left-area" style="width: 100%; display: flex; flex-direction: row;" >
+                                            <div style="display:flex; flex-direction: column;width: 80%;"><h2>INTENSITY</h2> <p class="any-info" style="margin-bottom: 6px;">(information if any)</p></div>
+                                            <div id = "intensity-value" style="display:flex;"></div>
+                                        </div>
+                                        <div id="intensity-widget-slider-area" style="display: flex; margin-left: 7px; margin-bottom: 10px;">
+                                            <!-- <div class="pickr"></div> -->
+                                            <input id="intensity" type="range" min="0" max="1" value="0.6" step="0.1" style="margin: 0;" oninput="document.getElementById('intensity-value').innerHTML = this.value" onload="document.getElementById('intensity-value').innerHTML = this.value"">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div style="float: 1; display:flex; flex-direction: column; margin-left: auto;">
-                            <button id="info-button" onclick="info_button(this.id)" class="side-nav-button">
+                            <button id="info-button" onclick="nav_button(this.id)" class="side-nav-button">
                                 <img src="assests\info-con.svg" class="align-center" style="margin: auto;"></img></button>
                         </div>
                     </div>
@@ -41,7 +54,7 @@
                             </div>
                             <div id="mat-widget" style="overflow-y: scroll;"></div>
                         </div>
-                        <div style="float: 1; display:flex; flex-direction: row; margin-left: auto;"><button id="mat-button" onclick="info_button(this.id)" class="side-nav-button"><img src="assests\info-con.svg" class="align-center" style="margin: auto;"></img></button></div>
+                        <div style="float: 1; display:flex; flex-direction: row; margin-left: auto;"><button id="mat-button" onclick="nav_button(this.id)" class="side-nav-button"><img src="assests\info-con.svg" class="align-center" style="margin: auto;"></img></button></div>
                     </div>
                     
                 </div>
@@ -49,7 +62,7 @@
         </div>
         <div id="bottom_area" style="height: 5%; abackground-color: bisque;"></div>
     </div>
-    <div id="color-widget" style="display: none;">
+    <div id= "sdav" class="color-widget" style="display: none;">
         <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
             <div id="color-widget-left-area" style="width: 101px;" >
                 <h2>COLOR</h2>
@@ -57,6 +70,18 @@
             </div>
             <div id="color-widget-right-area">
                 <div class="pickr"></div>
+            </div>
+        </div>
+    </div>
+    <div id= "sadc" class="intensity-widget" style="display: none;">
+        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
+            <div id="intensity-widget-left-area" style="width: 101px;" >
+                <h2>INTENSITY</h2>
+                <p class="any-info">(information if any)</p>
+            </div>
+            <div id="intensity-widget-slider-area">
+                <!-- <div class="pickr"></div> -->
+                <input type="range" min="0" max="1" value="0.6">
             </div>
         </div>
     </div>
