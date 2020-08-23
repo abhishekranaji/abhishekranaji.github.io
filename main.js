@@ -41,7 +41,7 @@ const pickr = Pickr.create({
 });
 
 
-const newLocal = {"color1" : [{"type":"color-widget", "value": "xyz"}]};
+const newLocal = {"color1" : [{"type":"color-widget", "value": "xyz"}],"color2" : [{"type":"color-widget", "value": "dsa"}]};
 function menu(id) {
     var previouskey;
     var info =  [];
@@ -49,41 +49,49 @@ function menu(id) {
     var res = id.split("-")[0];
     Object.entries(newLocal).forEach(([keys]) => {
     for (const [key, value] of Object.entries(newLocal[`${keys}`][0])) {
-        if (`${key}` === "type") {
-            var x = document.getElementById(`${value}`);
-            console.log(x);
-            x.classList.add(`${keys}`);
-            if (document.getElementById(`${res}-widget-area`).querySelectorAll(`#${res}-title`)) {
-                var y = document.getElementById(`${res}-widget-area`).querySelector(`#${res}-widget`);
-                if (y.innerHTML == "") {
-                    y.innerHTML = x.outerHTML;
-                  } else {
-                      y.innerHTML += x.outerHTML;
-                  }
-            }
-            // Resiezer
-            var resizer = document.createElement('div');
-            resizer.className = "info-resizer1";
-            var z = document.getElementById(`${res}-resize`);
-            z.appendChild(resizer);
-            resizer.addEventListener('mousedown', initDrag, false);
-            var startX, startY, startHeight;
-            function initDrag(e) {
-                startY = e.clientY;
-                startHeight = parseInt(document.defaultView.getComputedStyle(z).height, 10);
-                document.documentElement.addEventListener('mousemove', doDrag, false);
-                document.documentElement.addEventListener('mouseup', stopDrag, false);
-            }
+        console.log([`${keys}`])
+        if (document.getElementById(`${res}-widget-area`).querySelector(`.${keys}`)) {
 
-            function doDrag(e) {
-                z.style.height = (startHeight + e.clientY - startY) + 'px';
-                y.style.height = (startHeight + e.clientY - startY)-28 + 'px';
-                y.style.maxHeight = (startHeight + e.clientY - startY)-28 + 'px';
-            }
+        } else {
+            if (`${key}` === "type") {
+                var x = document.getElementById(`${value}`);
+                x.classList.add(`${keys}`);
+                if (document.getElementById(`${res}-widget-area`).querySelectorAll(`#${res}-title`)) {
+                    var y = document.getElementById(`${res}-widget-area`).querySelector(`#${res}-widget`);
+                    if (y.innerHTML == "") {
+                        y.innerHTML = x.outerHTML;
+                    } else {
+                        y.innerHTML += x.outerHTML;
+                    }
+                }
+                // color widget 
+                if (`${value}` == "color-widget") {
+                    document.getElementById(`${res}-widget-area`)
+                }
+                // Resiezer
+                var resizer = document.createElement('div');
+                resizer.className = "info-resizer1";
+                var z = document.getElementById(`${res}-resize`);
+                z.appendChild(resizer);
+                resizer.addEventListener('mousedown', initDrag, false);
+                var startX, startY, startHeight;
+                function initDrag(e) {
+                    startY = e.clientY;
+                    startHeight = parseInt(document.defaultView.getComputedStyle(z).height, 10);
+                    document.documentElement.addEventListener('mousemove', doDrag, false);
+                    document.documentElement.addEventListener('mouseup', stopDrag, false);
+                }
 
-            function stopDrag(e) {
-                document.documentElement.removeEventListener('mousemove', doDrag, false);
-                document.documentElement.removeEventListener('mouseup', stopDrag, false);
+                function doDrag(e) {
+                    z.style.height = (startHeight + e.clientY - startY) + 'px';
+                    y.style.height = (startHeight + e.clientY - startY)-28 + 'px';
+                    y.style.maxHeight = (startHeight + e.clientY - startY)-28 + 'px';
+                }
+
+                function stopDrag(e) {
+                    document.documentElement.removeEventListener('mousemove', doDrag, false);
+                    document.documentElement.removeEventListener('mouseup', stopDrag, false);
+                }
             }
         }
       }} );  
