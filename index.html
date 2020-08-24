@@ -23,11 +23,11 @@
             <div id="right_area" style="width: 56px;z-index: 400;">
                 <div class="right-nav-window"  style="display:flex; flex-direction: column;">
                     <div id="info-resize" style="display: flex; max-height: 100%; position: relative; min-height: 28px;">
-                        <div id="info-widget-area" style="flex-direction: row; margin-left: -140px;">
-                            <div id="info-title" class="card-window" style="display: none;" role="window">
+                        <div id="info-widget-area" style="flex-direction: row; margin-left: -148px;">
+                            <div id="info-title" class="card-window" style="display: none; margin-left: 8px;" role="window">
                                 <h1 id="info-heading" onclick="menu(this.id)" >TITLE</h1>
                             </div>
-                            <div id="info-widget" style="overflow-y: scroll;max-height: 260px">
+                            <div id="info-widget" style="overflow-y: scroll;max-height: 260px; padding-left: 8px; padding-bottom: 8px;">
                                 <div id= "csacds" class="intensity-widget" style="display: flex;">
                                     <div class= "card-window" style="display:flex; flex-direction:column; margin-top: 4px;">
                                         <div id="intensity-widget-left-area" style="width: 100%; display: flex; flex-direction: row;" >
@@ -107,6 +107,52 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id= "" class="alpha-map-widget" style="display: flex;">
+                                    <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
+                                        <div id="alpha-map-widget-left-area" style="width: 101px;" >
+                                            <h2>ALPHA MAP</h2>
+                                            <p class="any-info" style="margin-bottom: 2px !important;">(information if any)</p>
+                                            <div style="display: flex; flex-direction: row; margin-bottom: 6px; padding-left: 8px;">
+                                                <button name="sad" style="width: 30px; height: 13px;margin-right: 3px; font: normal normal normal 4px/5px Arial;
+                                                letter-spacing: 0px;color: #666666;opacity: 1; padding: 0px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                                                box-shadow: 0px 2px 1px #00000029;border: 0px;border-radius: 2px;opacity: 1;"> CHANGE</button> 
+                                            </div>
+                                        </div>
+                                        <div id="alpha-map-widget-right-area" style="display:flex; flex-direction: row;  margin-top: 7px;right: 0;margin-right: 8px;" >
+                                            <div style="display: flex; top: 399px; left: 1177px;width: 30px; height: 30px;;box-shadow: 0px 2px 1px #00000029;
+                                            border: 0px;border-radius: 2px;opacity: 1; background-color: tomato; display: none;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id= "" class="textarea-widget" style="display: flex;">
+                                    <div class= "card-window" style="display:flex; flex-direction: column; margin-top: 4px; width: 145px; margin-left: -10px;">
+                                        <div id="textarea-widget-left-area" style="width: 101px;" >
+                                            <h2>TRANSFORMATIONS</h2>
+                                            <p class="any-info">(information if any)</p>
+                                        </div>
+                                        <div id="textarea-widget-left-bottom-area" style="margin-top: 2px;right: 0;margin-left:5px; margin-right: 11px; display: flex; flex-direction: column;" >
+                                            <div style="display: flex; flex-direction: row; width: 100%; height: 14px;">
+                                                <div id="textarea-name-position" class="textarea-name-heading">P :</div>
+                                                <input type="text" id="px" name="px" value="12">
+                                                <input type="text" id="py" name="py" value="12">
+                                                <input type="text" id="pz" name="pz" value="12">
+                                            </div>
+                                            <div style="display: flex; flex-direction: row; width: 100%; height: 14px; margin-top: 4px;">
+                                                <div id="textarea-name-rotate" class="textarea-name-heading">R :</div>
+                                                <input type="text" id="px" name="px" value="12">
+                                                <input type="text" id="py" name="py" value="12">
+                                                <input type="text" id="pz" name="pz" value="12">
+                                            </div>
+                                            <div style="display: flex; flex-direction: row; width: 100%; height: 14px; margin-top: 4px; margin-bottom: 8px;">
+                                                <div id="textarea-name-scale" class="textarea-name-heading">S :</div>
+                                                <input type="text" id="px" name="px" value="12">
+                                                <input type="text" id="py" name="py" value="12">
+                                                <input type="text" id="pz" name="pz" value="12">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
 
                                  
@@ -218,6 +264,51 @@
                           <option value="2">Any Text</option>
                         </select>
                       </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id= "" class="alpha-map-widget" style="display: none;">
+        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
+            <div id="alpha-map-widget-left-area" style="width: 101px;" >
+                <h2>ALPHA MAP</h2>
+                <p class="any-info" style="margin-bottom: 2px !important;">(information if any)</p>
+                <div style="display: flex; flex-direction: row; margin-bottom: 6px; padding-left: 8px;">
+                    <button name="sad" style="width: 30px; height: 13px;margin-right: 3px; font: normal normal normal 4px/5px Arial;
+                    letter-spacing: 0px;color: #666666;opacity: 1; padding: 0px; background: #FFFFFF 0% 0% no-repeat padding-box;
+                    box-shadow: 0px 2px 1px #00000029;border: 0px;border-radius: 2px;opacity: 1;"> CHANGE</button> 
+                </div>
+            </div>
+            <div id="alpha-map-widget-right-area" style="display:flex; flex-direction: row;  margin-top: 7px;right: 0;margin-right: 8px;" >
+                <div style="display: flex; top: 399px; left: 1177px;width: 30px; height: 30px;;box-shadow: 0px 2px 1px #00000029;
+                border: 0px;border-radius: 2px;opacity: 1; background-color: tomato; display: none;"></div>
+            </div>
+        </div>
+    </div>
+    <div id= "" class="textarea-widget" style="display: none;">
+        <div class= "card-window" style="display:flex; flex-direction: column; margin-top: 4px; width: 145px;">
+            <div id="textarea-widget-left-area" style="width: 101px;" >
+                <h2>TRANSFORMATIONS</h2>
+                <p class="any-info">(information if any)</p>
+            </div>
+            <div id="textarea-widget-left-bottom-area" style="margin-top: 2px;right: 0;margin-left:5px; margin-right: 11px; display: flex; flex-direction: column;" >
+                <div style="display: flex; flex-direction: row; width: 100%; height: 14px;">
+                    <div id="textarea-name-position" class="textarea-name-heading">P :</div>
+                    <input type="text" id="px" name="px" value="12">
+                    <input type="text" id="py" name="py" value="12">
+                    <input type="text" id="pz" name="pz" value="12">
+                </div>
+                <div style="display: flex; flex-direction: row; width: 100%; height: 14px; margin-top: 4px;">
+                    <div id="textarea-name-rotate" class="textarea-name-heading">R :</div>
+                    <input type="text" id="px" name="px" value="12">
+                    <input type="text" id="py" name="py" value="12">
+                    <input type="text" id="pz" name="pz" value="12">
+                </div>
+                <div style="display: flex; flex-direction: row; width: 100%; height: 14px; margin-top: 4px; margin-bottom: 8px;">
+                    <div id="textarea-name-scale" class="textarea-name-heading">S :</div>
+                    <input type="text" id="px" name="px" value="12">
+                    <input type="text" id="py" name="py" value="12">
+                    <input type="text" id="pz" name="pz" value="12">
                 </div>
             </div>
         </div>

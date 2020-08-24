@@ -437,3 +437,29 @@ outline: none;
   .select-items-text {
       padding-left: 4px;
   }
+
+
+  /* TextArea */
+
+  .textarea-name-heading {
+    text-align: left;
+    font: normal normal normal 7px/10px Alata;
+    letter-spacing: 0px;
+    color: #949494;
+    opacity: 1;
+  }
+
+  /* Input[text] */
+  input[type=text] {
+    width: 25px;
+    height: 15px;
+    box-sizing: border-box;
+    border: none;
+    margin-left: 18px;
+    border-bottom: .5px solid #D0D0D0;
+    text-align: center;
+    background-color: transparent;
+    font: normal normal normal 10px/13px Calibri;
+    letter-spacing: 0px;
+    color: #949494;
+  }
