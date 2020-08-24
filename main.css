@@ -463,3 +463,76 @@ outline: none;
     letter-spacing: 0px;
     color: #949494;
   }
+
+
+  /* left nav css */
+  ul, #myUL {
+    list-style-type: none;
+  }
+  
+  #myUL {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-left-side-expand {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+    width: fit-content;
+    display: flex;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 7px;
+    text-align: left;
+    font: normal normal normal 12px/16px Alata;
+    letter-spacing: 0px;
+    color: #666666;
+    opacity: 1;
+  }
+  
+  .nested-no-expand {
+    cursor: pointer;
+    width: fit-content;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 7px;
+    text-align: left;
+    font: normal normal normal 12px/16px Alata;
+    letter-spacing: 0px;
+    color: #666666;
+    opacity: 1;
+    }
+  .nav-left-side-expand::before {
+    content: "\002B";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  .nav-left-side-expand-down::before {
+    
+    content: "\002D";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  
+  .nested {
+    display: none;
+  }
+  
+  .active {
+    display: block;
+    padding-left: 20px;;
+  }
