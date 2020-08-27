@@ -3,250 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="app.css">
     <link href='https://fonts.googleapis.com/css?family=Do+Hyeon' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Alata' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
     <title>Document</title>
 </head>
-<body style="padding:0; margin: 0; width:100%; height:100%; background-color: #F6F6F6;">
-    <div style="display: flex; flex-direction: column; width: 100%; height:100%; abackground-color: white;">
-        <div id="top_area" style="height: 5%; abackground-color: orange;"></div>
-        <div id="center_column" style=" flex: 1; display: flex; height: 100%">
-            <div id="left_area" style="width: 37px;z-index: 5;">
-                <div class="nav-left-side" style="display: flex; width: 800px; height: fit-content; margin-bottom: 20px; padding-left: 45px; padding-top: 10px; border-radius: 10px;">
-                    <ul id="myUL">
-                        <li><span class="nav-left-side-expand">SCENE</span>
-                          <ul class="nested">
-                            <li><span class="nav-left-side-expand">CAMERA</span></li>
-                            <li><span class="nav-left-side-expand">SUN</span></li>
-                            <li><span class="nav-left-side-expand">GROUND</span>
-                              <ul class="nested">
-                                <li class="nested-no-expand">Any-Text</li>
-                                <li class="nested-no-expand">Any-text</li>
-                                <li><span class="nav-left-side-expand">Any Text</span>
-                                  <ul class="nested">
-                                    <li class="nested-no-expand">Any text</li>
-                                    <li class="nested-no-expand">Any Text</li>
-                                    <li class="nested-no-expand">Any Text</li>
-                                    <li class="nested-no-expand">Any Text</li>
-                                  </ul>
-                                </li>
-                              </ul>
-                            </li>  
-                          </ul>
-                        </li>
-                      </ul>
-                </div>
+<body>
+    <div style="display: flex; flex-direction: column; width: 100%; height:100%;">
+        <div id="top_area" style="height: 80px;"></div>
+        <div id="center_row" style=" flex: 1; display: flex; height: 100%">
+            <div id="left_area" style="width: 80px; z-index: 5;">
+                
             </div>
             <div id="center_area" style="flex: 1;">
-                <div style="background: #d4d4d4 0% 0% no-repeat padding-box;
-                border-radius: 10px;
-                opacity: 1; height: 95%; width: 100%;z-index: 1000;" class="shadow-4"></div>
+                <div id="main_content" class="shadow-4"></div>
             </div>
-            <div id="right_area" style="width: 56px;z-index: 400;">
-                <div class="right-nav-window"  style="display:flex; flex-direction: column;">
-                    <div id="info-resize" style="display: flex; max-height: 100%; position: relative; min-height: 28px;">
-                        <div id="info-widget-area" style="flex-direction: row; margin-left: -148px;">
-                            <div id="info-title" class="card-window" style="display: none; margin-left: 8px;" role="window">
-                                <h1 id="info-heading" onclick="menu(this.id)" >TITLE</h1>
-                            </div>
-                            <div id="info-widget" style="overflow-y: scroll;max-height: 260px; padding-left: 8px; padding-bottom: 8px;">
-                                <div id= "csacds" class="intensity-widget" style="display: flex;">
-                                    <div class= "card-window" style="display:flex; flex-direction:column; margin-top: 4px;">
-                                        <div id="intensity-widget-left-area" style="width: 100%; display: flex; flex-direction: row;" >
-                                            <div style="display:flex; flex-direction: column;width: 80%;"><h2>INTENSITY</h2> <p class="any-info" style="margin-bottom: 6px;">(information if any)</p></div>
-                                            <div id = "intensity-value" style="display:flex;"></div>
-                                        </div>
-                                        <div id="intensity-widget-slider-area" style="display: flex; margin-left: 7px; margin-bottom: 10px;">
-                                            <!-- <div class="pickr"></div> -->
-                                            <input id="intensity" type="range" min="0" max="1" value="0.6" step="0.1" style="margin: 0;" oninput="document.getElementById('intensity-value').innerHTML = this.value" onload="document.getElementById('intensity-value').innerHTML = this.value"">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id= "" class="toggle-widget" style="display: flex;">
-                                    <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
-                                        <div id="toggle-widget-left-area" style="width: 101px;" >
-                                            <h2>VISIBILITY</h2>
-                                            <p class="any-info">(information if any)</p>
-                                        </div>
-                                        <div id="toggle-widget-right-area" style="margin-top: 7px;right: 0;margin-right: 11px;" >
-                                            <label class="switch">
-                                                <input type="checkbox" checked>
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id= "" class="target-widget" style="display: flex;">
-                                    <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
-                                        <div id="toggle-widget-left-area" style="width: 101px;" >
-                                            <h2>Target</h2>
-                                            <p class="any-info">(information if any)</p>
-                                        </div>
-                                        <div id="toggle-widget-right-area" style="display:flex; flex-direction: row;  margin-top: 7px;right: 0;margin-right: 8px;" >
-                                            <button name="sad" style="width: 30px; height: 13px;margin-right: 3px; font: normal normal normal 4px/5px Arial;
-                                            letter-spacing: 0px;color: #666666;opacity: 1; padding: 0px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                                            box-shadow: 0px 2px 1px #00000029;border: 0px;border-radius: 2px;opacity: 1;"> CHANGE</button> 
-                                            <button name="dsvs" style="width: 30px; height: 13px; font: normal normal normal 4px/5px Arial;
-                                            letter-spacing: 0px;color: #666666;opacity: 1; padding: 0px;background: #FFFFFF 0% 0% no-repeat padding-box;
-                                            box-shadow: 0px 2px 1px #00000029;border: 0px;border-radius: 2px;opacity: 1;"> SELECT</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id= "" class="map-widget" style="display: flex;">
-                                    <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
-                                        <div id="map-widget-left-area" style="width: 101px;" >
-                                            <h2>Map</h2>
-                                            <p class="any-info" style="margin-bottom: 2px !important;">(information if any)</p>
-                                            <div style="display: flex; flex-direction: row; margin-bottom: 6px; padding-left: 8px;">
-                                                <button name="sad" style="width: 30px; height: 13px;margin-right: 3px; font: normal normal normal 4px/5px Arial;
-                                                letter-spacing: 0px;color: #666666;opacity: 1; padding: 0px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                                                box-shadow: 0px 2px 1px #00000029;border: 0px;border-radius: 2px;opacity: 1;"> CHANGE</button> 
-                                                <button name="dsvs" style="width: 30px; height: 13px; font: normal normal normal 4px/5px Arial;
-                                                letter-spacing: 0px;color: #666666;opacity: 1; padding: 0px;background: #FFFFFF 0% 0% no-repeat padding-box;
-                                                box-shadow: 0px 2px 1px #00000029;border: 0px;border-radius: 2px;opacity: 1;"> SELECT</button>
-                                            </div>
-                                        </div>
-                                        <div id="map-widget-right-area" style="display:flex; flex-direction: row;  margin-top: 7px;right: 0;margin-right: 8px;" >
-                                            <div style="display: flex; top: 399px; left: 1177px;width: 30px; height: 30px;;box-shadow: 0px 2px 1px #00000029;
-                                            border: 0px;border-radius: 2px;opacity: 1; background-color: tomato; "></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id= "" class="option-widget" style="display: flex;">
-                                    <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
-                                        <div id="option-widget-left-area" style="width: 100%;" >
-                                            <h2>OPTION</h2>
-                                            <p class="any-info" style="margin-bottom: 2px !important;">(information if any)</p>
-                                            <div style="display: flex; flex-direction: row; margin-bottom: 6px; position: relative;">
-                                                <div class="option-select">
-                                                    <select>
-                                                      <option value="0">Any Text</option>
-                                                      <option value="1">Any Text</option>
-                                                      <option value="2">Any Text</option>
-                                                    </select>
-                                                  </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id= "" class="alpha-map-widget" style="display: flex;">
-                                    <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
-                                        <div id="alpha-map-widget-left-area" style="width: 101px;" >
-                                            <h2>ALPHA MAP</h2>
-                                            <p class="any-info" style="margin-bottom: 2px !important;">(information if any)</p>
-                                            <div style="display: flex; flex-direction: row; margin-bottom: 6px; padding-left: 8px;">
-                                                <button name="sad" style="width: 30px; height: 13px;margin-right: 3px; font: normal normal normal 4px/5px Arial;
-                                                letter-spacing: 0px;color: #666666;opacity: 1; padding: 0px; background: #FFFFFF 0% 0% no-repeat padding-box;
-                                                box-shadow: 0px 2px 1px #00000029;border: 0px;border-radius: 2px;opacity: 1;"> CHANGE</button> 
-                                            </div>
-                                        </div>
-                                        <div id="alpha-map-widget-right-area" style="display:flex; flex-direction: row;  margin-top: 7px;right: 0;margin-right: 8px;" >
-                                            <div style="display: flex; top: 399px; left: 1177px;width: 30px; height: 30px;;box-shadow: 0px 2px 1px #00000029;
-                                            border: 0px;border-radius: 2px;opacity: 1; background-color: tomato; display: none;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id= "" class="textarea-widget" style="display: flex;">
-                                    <div class= "card-window" style="display:flex; flex-direction: column; margin-top: 4px; width: 145px; margin-left: -10px;">
-                                        <div id="textarea-widget-left-area" style="width: 101px;" >
-                                            <h2>TRANSFORMATIONS</h2>
-                                            <p class="any-info">(information if any)</p>
-                                        </div>
-                                        <div id="textarea-widget-left-bottom-area" style="margin-top: 2px;right: 0;margin-left:5px; margin-right: 11px; display: flex; flex-direction: column;" >
-                                            <div style="display: flex; flex-direction: row; width: 100%; height: 14px;">
-                                                <div id="textarea-name-position" class="textarea-name-heading">P :</div>
-                                                <input type="text" id="px" name="px" value="12">
-                                                <input type="text" id="py" name="py" value="12">
-                                                <input type="text" id="pz" name="pz" value="12">
-                                            </div>
-                                            <div style="display: flex; flex-direction: row; width: 100%; height: 14px; margin-top: 4px;">
-                                                <div id="textarea-name-rotate" class="textarea-name-heading">R :</div>
-                                                <input type="text" id="px" name="px" value="12">
-                                                <input type="text" id="py" name="py" value="12">
-                                                <input type="text" id="pz" name="pz" value="12">
-                                            </div>
-                                            <div style="display: flex; flex-direction: row; width: 100%; height: 14px; margin-top: 4px; margin-bottom: 8px;">
-                                                <div id="textarea-name-scale" class="textarea-name-heading">S :</div>
-                                                <input type="text" id="px" name="px" value="12">
-                                                <input type="text" id="py" name="py" value="12">
-                                                <input type="text" id="pz" name="pz" value="12">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                 
-                            </div>
-                        </div>
-                        <div style="float: 1; display:flex; flex-direction: column; margin-left: auto;">
-                            <button id="info-button" onclick="nav_button(this.id)" class="side-nav-button">
-                                <img src="assests\info-con.svg" class="align-center" style="margin: auto;"></img></button>
-                        </div>
-                    </div>
-                    <div style="display: flex; max-height: 100%; margin-top:10px;">
-                        <div id="mat-widget-area" style="flex-direction: row; margin-left: -140px;">
-                            <div id="mat-title" class="card-window" style="display: none;" role="window">
-                                <h1 id="mat-heading" onclick="menu(this.id)" >TITLE</h1>
-                            </div>
-                            <div id="mat-widget" style="overflow-y: scroll;"></div>
-                        </div>
-                        <div style="float: 1; display:flex; flex-direction: row; margin-left: auto;"><button id="mat-button" onclick="nav_button(this.id)" class="side-nav-button"><img src="assests\info-con.svg" class="align-center" style="margin: auto;"></img></button></div>
-                    </div>
-                    
-                </div>
+            <div id="right_area" style="width: 80px; z-index: 400;">
+                
             </div>
         </div>
-        <div id="bottom_area" style="height: 5%; abackground-color: bisque;"></div>
+        <div id="bottom_area" style="height: 80px;"></div>
     </div>
-    <div id= "" class="color-widget" style="display: none;">
-        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
-            <div id="color-widget-left-area" style="width: 101px;" >
+
+
+
+
+    <!-- TEMPLATES -->
+
+    <!-- Right Window Template -->
+    <div id = "right-window-template" style="display: none;">
+        <div class="right-window"  style="display:flex; flex-direction: row-reverse; margin-top : 5px;">
+            <div class="resize-div" style="display: flex; flex-direction: column; width: 100%; max-height: 100%; min-height: 28px; align-items: center; flex: none;">
+                <div style="flex: 1">
+                    <button class="right-window-button">
+                        <img src="assests\info-con.svg" class="align-center" style="margin: auto;"></img>
+                    </button>
+                </div>
+                <div>---</div>
+            </div>
+
+            <div class="widget-area" style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 5px;">
+                <div class="card-window" style="display: flex; margin-left: 8px;" role="title">
+                    <h1 class="card-heading" >TITLE</h1>
+                </div>
+                <div class="widget-content" style="margin-left: 8px; display: flex; flex-direction: column; align-items: flex-end;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Color widget Template -->
+    <div id="color-widget-template" style="display: none;">
+        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px; padding-bottom: 4px;">
+            <div class="color-widget-text-area" style="width: 101px;" >
                 <h2>COLOR</h2>
                 <p class="any-info">(information if any)</p>
             </div>
-            <div id="color-widget-right-area">
-                <div class="pickr"></div>
+            <div class="color-widget-color-area">
+                <input class="color-widget-pickr" type="color" value="#ff0000">
             </div>
         </div>
     </div>
-    <div id= "" class="intensity-widget" style="display: none;">
-        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
-            <div id="intensity-widget-left-area" style="width: 101px;" >
-                <h2>INTENSITY</h2>
-                <p class="any-info">(information if any)</p>
+
+    <!-- Intensity widget -->
+    <div id= "intensity-widget-template" style="display: none;">
+        <div class= "card-window" style="display:flex; flex-direction:column; margin-top: 4px;">
+            <div class="intensity-widget-left-area" style="width: 100%; display: flex; flex-direction: row;" >
+                <div style="display:flex; flex-direction: column;width: 70%;"><h2>INTENSITY</h2> <p class="any-info" style="margin-bottom: 6px;">(information if any)</p></div>
+                <div><input type="number" class="intensity-value" value="" step=".1" min="0" max="1" style="width: 50%;"></div>
+                <!-- <div class="intensity-value" style="display:flex;"></div> -->
             </div>
-            <div id="intensity-widget-slider-area">
-                <!-- <div class="pickr"></div> -->
-                <input type="range" min="0" max="1" value="0.6">
+            <div class="intensity-widget-slider-area" style="display: flex; margin-left: 7px; margin-bottom: 10px;">
+                <input class="intensity" type="range" min="0" max="1" value="0.6" step="0.1" style="margin: 0;">
             </div>
         </div>
     </div>
-    <div id= "" class="toggle-widget" style="display: none;">
+
+    <!-- Visisbility widget template -->
+    <div id= "visibility-widget-template" style="display: none;">
         <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
-            <div id="toggle-widget-left-area" style="width: 101px;" >
+            <div class="toggle-widget-left-area" style="width: 101px;" >
                 <h2>VISIBILITY</h2>
                 <p class="any-info">(information if any)</p>
             </div>
-            <div id="toggle-widget-right-area" style="margin-top: 7px;right: 0;margin-right: 11px;" >
+            <div class="toggle-widget-right-area" style="margin-top: 7px;right: 0;margin-right: 11px;" >
                 <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider round"></span>
+                    <input type="checkbox" class="toggle-widget-value" checked>
+                    <span class="toggle-widget-slider round"></span>
                 </label>
             </div>
         </div>
     </div>
-    <div id= "" class="target-widget" style="display: none;">
+
+    <!-- Target widget template -->
+    <div id= "target-widget-template" style="display: block;">
         <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
-            <div id="target-widget-left-area" style="width: 101px;" >
+            <div class="target-widget-left-area" style="width: 101px;" >
                 <h2>Target</h2>
                 <p class="any-info">(information if any)</p>
             </div>
-            <div id="target-widget-right-area" style="display:flex; flex-direction: row;  margin-top: 7px;right: 0;margin-right: 8px;" >
+            <div class="target-widget-right-area" style="display:flex; flex-direction: row;  margin-top: 7px;right: 0;margin-right: 8px;" >
                 <button name="sad" style="width: 30px; height: 13px;margin-right: 3px; font: normal normal normal 4px/5px Arial;
                 letter-spacing: 0px;color: #666666;opacity: 1; padding: 0px; background: #FFFFFF 0% 0% no-repeat padding-box;
                 box-shadow: 0px 2px 1px #00000029;border: 0px;border-radius: 2px;opacity: 1;"> CHANGE</button> 
@@ -256,7 +115,10 @@
             </div>
         </div>
     </div>
-    <div id= "" class="map-widget" style="display: none;">
+
+    <!-- Map Widget Template -->
+
+    <div id= "map-widget-template" style="display: none;">
         <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
             <div id="map-widget-left-area" style="width: 101px;" >
                 <h2>Map</h2>
@@ -276,24 +138,9 @@
             </div>
         </div>
     </div>
-    <div id= "" class="option-widget" style="display: none;">
-        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px; position: relative;">
-            <div id="option-widget-left-area" style="width: 100%;" >
-                <h2>OPTION</h2>
-                <p class="any-info" style="margin-bottom: 2px !important;">(information if any)</p>
-                <div style="display: flex; flex-direction: row; margin-bottom: 6px;">
-                    <div class="option-select">
-                        <select>
-                          <option value="0">Any Text</option>
-                          <option value="1">Any Text</option>
-                          <option value="2">Any Text</option>
-                        </select>
-                      </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id= "" class="alpha-map-widget" style="display: none;">
+
+    <!-- Alpha map template -->
+    <div id= "alpha-map-widget-template" style="display: none;">
         <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
             <div id="alpha-map-widget-left-area" style="width: 101px;" >
                 <h2>ALPHA MAP</h2>
@@ -310,34 +157,88 @@
             </div>
         </div>
     </div>
-    <div id= "" class="textarea-widget" style="display: none;">
+
+    <!-- Position widget template -->
+
+    <div id= "position-widget-template" style="display: none;">
         <div class= "card-window" style="display:flex; flex-direction: column; margin-top: 4px; width: 145px;">
             <div id="textarea-widget-left-area" style="width: 101px;" >
                 <h2>TRANSFORMATIONS</h2>
                 <p class="any-info">(information if any)</p>
             </div>
             <div id="textarea-widget-left-bottom-area" style="margin-top: 2px;right: 0;margin-left:5px; margin-right: 11px; display: flex; flex-direction: column;" >
-                <div style="display: flex; flex-direction: row; width: 100%; height: 14px;">
+                <div style="display: flex; flex-direction: row; width: 100%; height: 14px; padding-bottom: 8px;">
                     <div id="textarea-name-position" class="textarea-name-heading">P :</div>
-                    <input type="text" id="px" name="px" value="12">
-                    <input type="text" id="py" name="py" value="12">
-                    <input type="text" id="pz" name="pz" value="12">
-                </div>
-                <div style="display: flex; flex-direction: row; width: 100%; height: 14px; margin-top: 4px;">
-                    <div id="textarea-name-rotate" class="textarea-name-heading">R :</div>
-                    <input type="text" id="px" name="px" value="12">
-                    <input type="text" id="py" name="py" value="12">
-                    <input type="text" id="pz" name="pz" value="12">
-                </div>
-                <div style="display: flex; flex-direction: row; width: 100%; height: 14px; margin-top: 4px; margin-bottom: 8px;">
-                    <div id="textarea-name-scale" class="textarea-name-heading">S :</div>
-                    <input type="text" id="px" name="px" value="12">
-                    <input type="text" id="py" name="py" value="12">
-                    <input type="text" id="pz" name="pz" value="12">
+                    <input type="text" class="px" value="12">
+                    <input type="text" class="py" value="12">
+                    <input type="text" class="pz" value="12">
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Rotation widget template -->
+
+    <div id= "rotation-widget-template" style="display: none;">
+        <div class= "card-window" style=" margin-top: 4px; width: 145px;">
+            <!-- <div id="textarea-widget-left-area" style="width: 101px;" >
+                <h2>TRANSFORMATIONS</h2>
+                <p class="any-info">(information if any)</p>
+            </div> -->
+            <div id="textarea-widget-left-bottom-area" style="margin-top: 2px;right: 0;margin-left:5px; margin-right: 11px; display: flex; flex-direction: column;" >
+                <div style="display: flex; flex-direction: row; width: 100%; height: 14px; padding-bottom: 8px;">
+                    <div class="textarea-name-heading">S :</div>
+                    <input type="text" class="rx" value="12">
+                    <input type="text" class="ry" value="12">
+                    <input type="text" class="rz" value="12">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scale widget template -->
+
+    <div id= "scale-widget-template" style="display: none;">
+        <div class= "card-window" style=" margin-top: 4px; width: 145px;">
+            <!-- <div id="textarea-widget-left-area" style="width: 101px;" >
+                <h2>TRANSFORMATIONS</h2>
+                <p class="any-info">(information if any)</p>
+            </div> -->
+            <div id="textarea-widget-left-bottom-area" style="margin-top: 2px;right: 0;margin-left:5px; margin-right: 11px; display: flex; flex-direction: column;" >
+                <div style="display: flex; flex-direction: row; width: 100%; height: 14px; padding-bottom: 8px;">
+                    <div class="textarea-name-heading">R :</div>
+                    <input type="text" class="sx" value="12">
+                    <input type="text" class="sy" value="12">
+                    <input type="text" class="sz" value="12">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Option widget -->
+    <div id= "option-widget-template" style="display: block;">
+        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
+            <div id="option-widget-left-area" style="width: 100%;" >
+                <h2>OPTION</h2>
+                <p class="any-info" style="margin-bottom: 2px !important;">(information if any)</p>
+                <div style="display: flex; flex-direction: row; margin-bottom: 6px;">
+                    <div class="option-select">
+                        <select>
+                          <option value="0">Text 1</option>
+                          <option value="1">Text 2</option>
+                          <option value="2">Text 3</option>
+                        </select>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OLD TEMPLATES -->
+
+   
+
+    
     
     <div class="nav-left-side" style="display: none; width: fit-content; height: fit-content; margin-bottom: 20px; padding-left: 40px; border-radius: 10px;">
         <ul id="myUL">
@@ -363,7 +264,8 @@
             </li>
           </ul>
     </div>
+    
 </body>
-<script src="main.js"></script>
-<script src="js/list.js"></script>
+<script src="app.js"></script>
+<script src="option.js"></script>
 </html>
