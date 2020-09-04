@@ -15,7 +15,7 @@
         <div id="top_area" style="height: 80px;"></div>
         <div id="center_row" style=" flex: 1; display: flex; height: 100%">
             <div id="left_area" style="width: 80px; z-index: 5;">
-                
+                <div id="scene_data"></div>
             </div>
             <div id="center_area" style="flex: 1;">
                 <div id="main_content" class="shadow-4"></div>
@@ -146,7 +146,7 @@
                 <h2>ALPHA MAP</h2>
                 <p class="any-info" style="margin-bottom: 2px !important;">(information if any)</p>
                 <div style="display: flex; flex-direction: row; margin-bottom: 6px; padding-left: 8px;">
-                    <button name="sad" style="width: 30px; height: 13px;margin-right: 3px; font: normal normal normal 4px/5px Arial;
+                    <button name="sad" style="width: 30px; height: 13px;margin-right: 3px; font: normal normal normal 12px/10px Alata;
                     letter-spacing: 0px;color: #666666;opacity: 1; padding: 0px; background: #FFFFFF 0% 0% no-repeat padding-box;
                     box-shadow: 0px 2px 1px #00000029;border: 0px;border-radius: 2px;opacity: 1;"> CHANGE</button> 
                 </div>
@@ -181,10 +181,6 @@
 
     <div id= "rotation-widget-template" style="display: none;">
         <div class= "card-window" style=" margin-top: 4px; width: 145px;">
-            <!-- <div id="textarea-widget-left-area" style="width: 101px;" >
-                <h2>TRANSFORMATIONS</h2>
-                <p class="any-info">(information if any)</p>
-            </div> -->
             <div id="textarea-widget-left-bottom-area" style="margin-top: 2px;right: 0;margin-left:5px; margin-right: 11px; display: flex; flex-direction: column;" >
                 <div style="display: flex; flex-direction: row; width: 100%; height: 14px; padding-bottom: 8px;">
                     <div class="textarea-name-heading">S :</div>
@@ -200,10 +196,6 @@
 
     <div id= "scale-widget-template" style="display: none;">
         <div class= "card-window" style=" margin-top: 4px; width: 145px;">
-            <!-- <div id="textarea-widget-left-area" style="width: 101px;" >
-                <h2>TRANSFORMATIONS</h2>
-                <p class="any-info">(information if any)</p>
-            </div> -->
             <div id="textarea-widget-left-bottom-area" style="margin-top: 2px;right: 0;margin-left:5px; margin-right: 11px; display: flex; flex-direction: column;" >
                 <div style="display: flex; flex-direction: row; width: 100%; height: 14px; padding-bottom: 8px;">
                     <div class="textarea-name-heading">R :</div>
@@ -217,7 +209,7 @@
 
     <!-- Option widget -->
     <div id= "option-widget-template" style="display: none;">
-        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px;">
+        <div class= "card-window" style="display:flex; flex-direction: row; margin-top: 4px; height: 50px;">
             <div id="option-widget-left-area" style="width: 100%;" >
                 <h2>OPTION</h2>
                 <p class="any-info" style="margin-bottom: 2px !important;">(information if any)</p>
@@ -234,36 +226,18 @@
         </div>
     </div>
 
-    <!-- OLD TEMPLATES -->
-
-   
-
-    
-    
-    <div class="nav-left-side" style="display: none; width: fit-content; height: fit-content; margin-bottom: 20px; padding-left: 40px; border-radius: 10px;">
-        <ul id="myUL">
-            <li><span class="nav-left-side-expand">SCENE</span>
-              <ul class="nested">
-                <li><span class="nav-left-side-expand">CAMERA</span></li>
-                <li><span class="nav-left-side-expand">SUN</span></li>
-                <li><span class="nav-left-side-expand">GROUND</span>
-                  <ul class="nested">
-                    <li class="nested-no-expand">Any-Text</li>
-                    <li class="nested-no-expand">Any-text</li>
-                    <li><span class="nav-left-side-expand">Any Text</span>
-                      <ul class="nested">
-                        <li class="nested-no-expand">Any text</li>
-                        <li class="nested-no-expand">Any Text</li>
-                        <li class="nested-no-expand">Any Text</li>
-                        <li class="nested-no-expand">Any Text</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>  
-              </ul>
-            </li>
-          </ul>
+    <!-- tree node TEMPLATES -->
+    <div id="tree_node_template" style="display: none;">
+        <div class="tree_node" >
+            <div > 
+                <div class="node_toggle"></div>
+                <div class="node_text"></div>
+                <div class="node_type"></div>
+            </div>
+            <div class="child_container"></div>
+        </div>
     </div>
+    
     
 </body>
 <script src="app.js"></script>

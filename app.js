@@ -60,9 +60,6 @@ var toggle_display = (obj) => {
     
 }
 
-var create_round_button = (id, text) => {
-    
-}
 
 var color_widget = (cid, cval) => {
     let widget_item = template_2_dom("color-widget-template");
@@ -149,8 +146,136 @@ var option_widget = (oid) => {
     widget_item.id = `${oid}-option-widget`;
     return widget_item
 }
+var trees = []
+var tree = (trid, pdata) => {
+    let data;
+    if (pdata === undefined) {
+        data = [];
+    }else if(Array.isArray(pdata)) {
+        data = pdata
+    }
+    trees[trid] = {id: trid, data: data};
+}
+var tree_add_node = (trid, pid, node) => {
+    let data = trees[trid].data;
+    let p = searchTree(data, pid)
+    if(p.children){
+        p.children.push(node)
+    } else {
+        p["children"] = node;
+    }
+}
 
-create_right_window_item("info", "i");
+var searchTree = (data, parent) => {
+    for(i=0; i < data.length; i ++){
+        if (data[i].id === parent){
+            return data[i];
+        }else if(data[i].children !== undefined && data[i].children.length !== 0){
+            return searchTree(data[i].children, parent);
+        }
+    }
+}
+var d = {
+    id:"d1",
+    text:"1",
+    type:"group",
+    children:[
+        {
+            id:"d2",
+            text:"2",
+            type:"mesh"
+        },
+        {
+            id:"d3",
+            text:"3",
+            type:"group",
+            children:[
+                {
+                    id:"d4",
+                    text:"4",
+                    type:"mesh"
+                },
+                {
+                    id:"d5",
+                    text:"5",
+                    type:"mesh"
+                }
+            ]
+        }
+    ]
+
+}
+
+// var tree_add_ui_id = (uid, tid, ui_node) => {
+//     let p = trees[tid];
+//     if(p.ui){
+//         console.log(ui_node)
+//         p["ui"] = [{id:uid,data:ui_node}];
+//     } else {
+//         p["ui"] = [{id:uid,data:ui_node}];
+        
+//     }
+// }
+var create_tree_div = (parent_div, data, ) => {
+    for(i=0; i < data.length; i++){
+        let id = data[i].id;
+        let text = data[i].text;
+        let template = template_2_dom("tree_node_template");
+        parent_div.append(template);
+        if(data[i].children !== undefined && data[i].children.length !== 0){
+            division += new_div.outerHTML;
+            // console.log(division)
+            return create_tree_div(new_div, data[i].children);
+        }
+    }
+}
+
+var append_tree_div_to_ui = (division, data, aid) => {
+    // 
+    let el = create_tree_div(division, data);
+    by_id(aid).appendChild(el);
+}
+
+var container_divs = new WeakMap()
+var add_ui_for_tree = (tid, uid) => {
+    let container = document.createElement("div");
+    container.setAttribute("class","tree_ui_container");
+    by_id(uid).appendChild(container);
+    let a = trees[tid];
+    if(a.ui === undefined){
+        a.ui = []
+    }
+    a.ui[uid] = {} // should be weak mapping or not required
+    container_divs[uid] = container
+    let data = trees[tid].data;
+    console.log(create_tree_div(container, data))
+}
+
+
+
+tree("scene_tree",[d])
+tree_add_node("scene_tree", "d5", [{id:"d6", text: "6", type:"light"}]);
+add_ui_for_tree("scene_tree", "scene_data")
+// let container = document.createElement("div");
+// append_tree_div_to_ui(container, trees["left_menu"].data, "left_area")
+// console.log(create_tree_div(container, trees["left_menu"].data))
+
+// tree_add_ui_id("top_left", "left_menu", {type:"grouped"})
+// tree_add_ui_id("bottom_left", "left_menu", {type:"grouped"})
+// console.log(trees)
+// {
+//     id:"",
+//     text:"",
+//     type:"",
+//     has_children: boolean,
+//     children:[]
+// }
+
+// tree_add_ui(uid, tid)
+
+// tree("left_menu",["ground","direction"])
+// tree_add_node("left_menu","ground",{"dcsac":"cdsvdf"});
+
 let item = color_widget("info","#000000")
 let item1 = color_widget("material","#ffffff")
 let item3 = intensity_widget("info", 0.2)
@@ -158,25 +283,22 @@ let item4 = visibility_widget("info", true)
 let item5 = target_widget("material")
 let item6 = map_widget("material")
 let item7 = alpha_map_widget("material")
+let item8 = position_widget("transformation")
+let item9 = rotation_widget("transformation")
+let item10 = scale_widget("transformation")
+let item11 = option_widget("transformation")
+
 
 create_right_window_item("transformation","t");
-let item8 = position_widget("transformation")
 add_to_right_window_item("transformation", item8)
-let item9 = rotation_widget("transformation")
 add_to_right_window_item("transformation", item9)
-let item10 = scale_widget("transformation")
 add_to_right_window_item("transformation", item10)
-let item11 = option_widget("transformation")
 add_to_right_window_item("transformation", item11)
-// console.log(by_id("info"));
+
+create_right_window_item("info", "i");
 add_to_right_window_item("info", item)
 add_to_right_window_item("info", item3)
 add_to_right_window_item("info", item4)
-
-// create_right_window_item("transformation", "t", "title");
-// let t = transformation_widget()
-// add_to_right_window_item("transformation", t)
-
 
 create_right_window_item("material", "m", "Material");
 add_to_right_window_item("material", item1)
