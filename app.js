@@ -218,7 +218,6 @@ var create_tree_div = (parent_div, data, pid) => {
         template.querySelector(".node_text").innerHTML = data[i].text;
         template.querySelector(".node_type").setAttribute("type", data[i].type);
         if (data[i].children === undefined) {
-            console.log(data[i])
             template.querySelector(".node_toggle").classList.toggle("node_toggle")
         }
         if (pid !== undefined) {
@@ -234,7 +233,6 @@ var create_tree_div = (parent_div, data, pid) => {
 
 var tree_div_toggle = () => {
     let child_containers = document.getElementsByClassName("parent_details");
-    console.log(child_containers)
     for (var i = 0; i < child_containers.length; i++) {
         child_containers[i].addEventListener("click", function() {
             // this.parentElement.querySelector(".nested").classList.toggle("active");
