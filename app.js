@@ -230,7 +230,6 @@ var create_tree_div = (parent_div, data, pid) => {
             create_tree_div(template, data[i].children, data[i].id);
         }
     }
-    tree_div_toggle();
 }
 
 var tree_div_toggle = () => {
@@ -264,7 +263,7 @@ var add_ui_for_tree = (tid, uid) => {
     container_divs[uid] = container
     let data = trees[tid].data;
     create_tree_div(container, data);
-    
+    tree_div_toggle();
 }
 
 
