@@ -1,4 +1,3 @@
-
 document.onload = function(){
     setup_right_menu()
 };
@@ -156,13 +155,14 @@ var tree = (trid, pdata) => {
     }
     trees[trid] = {id: trid, data: data};
 }
-var tree_add_node = (trid, pid, node) => {
+var tree_add_nodes = (trid, pid, nodes_array) => {
     let data = trees[trid].data;
     let p = searchTree(data, pid)
     if(p.children){
-        p.children.push(node)
+        p.children.push(...nodes_array) // append
+        //a.push.apply(a, b)
     } else {
-        p["children"] = node;
+        p["children"] = nodes_array;
     }
 }
 
@@ -199,6 +199,11 @@ var d = {
                     id:"d5",
                     text:"5",
                     type:"mesh"
+                },
+                {
+                    id:"d7",
+                    text:"asfcs",
+                    type:"mesh"
                 }
             ]
         }
@@ -206,35 +211,45 @@ var d = {
 
 }
 
-// var tree_add_ui_id = (uid, tid, ui_node) => {
-//     let p = trees[tid];
-//     if(p.ui){
-//         console.log(ui_node)
-//         p["ui"] = [{id:uid,data:ui_node}];
-//     } else {
-//         p["ui"] = [{id:uid,data:ui_node}];
-        
-//     }
-// }
-var create_tree_div = (parent_div, data, ) => {
+var create_tree_div = (parent_div, data, pid) => {
     for(i=0; i < data.length; i++){
-        let id = data[i].id;
-        let text = data[i].text;
         let template = template_2_dom("tree_node_template");
-        parent_div.append(template);
-        if(data[i].children !== undefined && data[i].children.length !== 0){
-            division += new_div.outerHTML;
-            // console.log(division)
-            return create_tree_div(new_div, data[i].children);
+        template.id = data[i].id;
+        template.querySelector(".node_text").innerHTML = data[i].text;
+        template.querySelector(".node_type").setAttribute("type", data[i].type);
+        if (data[i].children === undefined) {
+            console.log(data[i])
+            template.querySelector(".node_toggle").classList.toggle("node_toggle")
         }
+        if (pid !== undefined) {
+           parent_div.querySelector(".child_container").appendChild(template);
+        } else {
+            parent_div.append(template);
+        }
+        if(data[i].children !== undefined){
+            create_tree_div(template, data[i].children, data[i].id);
+        }
+    }
+    tree_div_toggle();
+}
+
+var tree_div_toggle = () => {
+    let child_containers = document.getElementsByClassName("parent_details");
+    console.log(child_containers)
+    for (var i = 0; i < child_containers.length; i++) {
+        child_containers[i].addEventListener("click", function() {
+            // this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.parentElement.querySelector(".child_container").classList.toggle("non-active");
+            this.parentElement.querySelector(".node_toggle").classList.toggle("node_toggle_non_active");
+        })
     }
 }
 
-var append_tree_div_to_ui = (division, data, aid) => {
-    // 
-    let el = create_tree_div(division, data);
-    by_id(aid).appendChild(el);
-}
+// var append_tree_div_to_ui = (division, data, aid) => {
+//     // 
+//     let el = create_tree_div(division, data);
+//     by_id(aid).appendChild(el);
+// }
 
 var container_divs = new WeakMap()
 var add_ui_for_tree = (tid, uid) => {
@@ -248,13 +263,14 @@ var add_ui_for_tree = (tid, uid) => {
     a.ui[uid] = {} // should be weak mapping or not required
     container_divs[uid] = container
     let data = trees[tid].data;
-    console.log(create_tree_div(container, data))
+    create_tree_div(container, data);
+    
 }
 
 
 
 tree("scene_tree",[d])
-tree_add_node("scene_tree", "d5", [{id:"d6", text: "6", type:"light"}]);
+tree_add_nodes("scene_tree", "d5", [{id:"d6", text: "6", type:"light"}]);
 add_ui_for_tree("scene_tree", "scene_data")
 // let container = document.createElement("div");
 // append_tree_div_to_ui(container, trees["left_menu"].data, "left_area")

@@ -403,3 +403,49 @@ input:checked + .toggle-widget-slider:before {
       padding-left: 4px;
   }
 
+  .tree_node {
+      padding-left: 20px;
+  }
+
+  .node_toggle_non_active::before {
+    content: "\002B"!important;
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  .node_toggle::before {
+    content: "\002D";
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  .parent_details {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+    width: fit-content;
+    display: flex;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 7px;
+    text-align: left;
+    font: normal normal normal 12px/16px Alata;
+    letter-spacing: 0px;
+    color: #666666;
+    opacity: 1;
+  }
+  
+  .tree_ui_container {
+      margin-left: 65px;
+      margin-top: 5px;
+  }
+
+  .non-active {
+      display: none;
+  }
