@@ -164,6 +164,7 @@ var tree_add_nodes = (trid, pid, nodes_array) => {
     } else {
         p["children"] = nodes_array;
     }
+    console.log(nodes_array)
 }
 
 var searchTree = (data, parent) => {
@@ -213,20 +214,14 @@ var d = {
 
 var create_tree_div = (parent_div, data, pid) => {
     for(i=0; i < data.length; i++){
-        let template = template_2_dom("tree_node_template");
-        template.id = data[i].id;
-        template.querySelector(".node_text").innerHTML = data[i].text;
-        template.querySelector(".node_type").setAttribute("type", data[i].type);
-        if (data[i].children === undefined) {
-            template.querySelector(".node_toggle").classList.toggle("node_toggle")
-        }
-        if (pid !== undefined) {
-           parent_div.querySelector(".child_container").appendChild(template);
-        } else {
-            parent_div.append(template);
-        }
+        let child_node = template_2_dom("tree_node_template");
+        child_node.setAttribute("node_id", data[i].id);
+        child_node.querySelector(".node_text").innerHTML = data[i].text;
+        child_node.querySelector(".node_type").setAttribute("type", data[i].type);
+        parent_div.appendChild(child_node);
         if(data[i].children !== undefined){
-            create_tree_div(template, data[i].children, data[i].id);
+            child_node.querySelector(".node_haschild").classList.toggle("node_toggle");
+            create_tree_div(child_node.querySelector(".child_container"), data[i].children, data[i].id);
         }
     }
 }
@@ -235,18 +230,11 @@ var tree_div_toggle = () => {
     let child_containers = document.getElementsByClassName("parent_details");
     for (var i = 0; i < child_containers.length; i++) {
         child_containers[i].addEventListener("click", function() {
-            // this.parentElement.querySelector(".nested").classList.toggle("active");
             this.parentElement.querySelector(".child_container").classList.toggle("non-active");
             this.parentElement.querySelector(".node_toggle").classList.toggle("node_toggle_non_active");
         })
     }
 }
-
-// var append_tree_div_to_ui = (division, data, aid) => {
-//     // 
-//     let el = create_tree_div(division, data);
-//     by_id(aid).appendChild(el);
-// }
 
 var container_divs = new WeakMap()
 var add_ui_for_tree = (tid, uid) => {

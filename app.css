@@ -403,6 +403,8 @@ input:checked + .toggle-widget-slider:before {
       padding-left: 4px;
   }
 
+  /* Tree CSS */
+
   .tree_node {
       padding-left: 20px;
   }
@@ -415,7 +417,7 @@ input:checked + .toggle-widget-slider:before {
   }
 
   .node_toggle::before {
-    content: "\002D";
+    content: "\002D ";
     color: black;
     display: inline-block;
     margin-right: 6px;
@@ -448,4 +450,8 @@ input:checked + .toggle-widget-slider:before {
 
   .non-active {
       display: none;
+  }
+
+  .node_haschild {
+      width: 12px;
   }
