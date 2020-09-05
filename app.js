@@ -123,6 +123,12 @@ var alpha_map_widget = (amid) => {
     return widget_item
 }
 
+var transformation_widget = (poid) => {
+    let widget_item = template_2_dom("transformation-widget-template");
+    widget_item.id = `${poid}-position-widget`;
+    return widget_item
+}
+
 var position_widget = (poid) => {
     let widget_item = template_2_dom("position-widget-template");
     widget_item.id = `${poid}-position-widget`;
@@ -297,9 +303,10 @@ let item8 = position_widget("transformation")
 let item9 = rotation_widget("transformation")
 let item10 = scale_widget("transformation")
 let item11 = option_widget("transformation")
-
+let item12 = transformation_widget("transformation")
 
 create_right_window_item("transformation","t");
+add_to_right_window_item("transformation", item12)
 add_to_right_window_item("transformation", item8)
 add_to_right_window_item("transformation", item9)
 add_to_right_window_item("transformation", item10)
