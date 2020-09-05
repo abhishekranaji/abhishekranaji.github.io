@@ -156,6 +156,7 @@ var tree = (trid, pdata) => {
     trees[trid] = {id: trid, data: data};
 }
 var tree_add_nodes = (trid, pid, nodes_array) => {
+    console.log((trid)) 
     let data = trees[trid].data;
     let p = searchTree(data, pid)
     if(p.children){
@@ -164,9 +165,16 @@ var tree_add_nodes = (trid, pid, nodes_array) => {
     } else {
         p["children"] = nodes_array;
     }
-    console.log(nodes_array)
+    let ui_ids = Object.keys(trees[trid].ui)
+    for (let i = 0; i<ui_ids.length; i++) {
+        // get child container of pid
+        let parent_div =  by_id(ui_ids[i]).querySelector(`[node_id = ${pid}]`);
+        parent_div.querySelector(".node_haschild").classList.toggle("node_toggle");
+        create_tree_div(parent_div.querySelector(".child_container"), nodes_array);
+    }
+    
 }
-
+// console.log(trees)
 var searchTree = (data, parent) => {
     for(i=0; i < data.length; i ++){
         if (data[i].id === parent){
@@ -255,8 +263,9 @@ var add_ui_for_tree = (tid, uid) => {
 
 
 tree("scene_tree",[d])
+add_ui_for_tree("scene_tree", "scene_data");
 tree_add_nodes("scene_tree", "d5", [{id:"d6", text: "6", type:"light"}]);
-add_ui_for_tree("scene_tree", "scene_data")
+console.log(trees)
 // let container = document.createElement("div");
 // append_tree_div_to_ui(container, trees["left_menu"].data, "left_area")
 // console.log(create_tree_div(container, trees["left_menu"].data))
