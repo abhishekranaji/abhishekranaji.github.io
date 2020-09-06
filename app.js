@@ -17,6 +17,7 @@ var by_id = (s_id) => {
     return document.getElementById(s_id)
 }
 
+
 var setup_right_menu = () => {
     // create_round_menu_item("transformation_view")
     // add above 2 right_menu
@@ -28,15 +29,14 @@ var create_right_window_item = (id, button_text, title) => {
     // get template
     let right_menu_window_item = template_2_dom("right-window-template");
     right_menu_window_item.id = `${id}`;
-    let resize_div = right_menu_window_item.querySelector(".resize-div");
-    resize_div.id = `${id}-resize`;
+    // let resize_drag_div = right_menu_window_item.querySelector(".resize-drag");
+    right_menu_window_item.querySelector(".resize-div").id = `${id}-resize`;
     let right_btn = right_menu_window_item.querySelector(".right-window-button");
     // right_btn.setAttribute("id", `${id}-button`);
     right_btn.onclick = function(e){
         toggle_display(right_menu_window_item.querySelector(".widget-area"))
     }
     right_menu_window_item.querySelector("[role='title']").onclick = () => {toggle_display(right_menu_window_item.querySelector(".widget-content"))}
-    
     by_id("right_area").appendChild(right_menu_window_item);
 }
 
@@ -50,7 +50,6 @@ var toggle_display = (obj) => {
         let display_type = obj.getAttribute("disp_type")
         if(display_type === null)
             display_type = ""
-        
         obj.style.display = display_type
     }else{
         obj.setAttribute("disp_type", obj.style.display)

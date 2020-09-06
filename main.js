@@ -57,18 +57,6 @@ function menu(id) {
                 var x = document.getElementsByClassName(`${value}`);
                 if (document.getElementById(`${res}-widget-area`).querySelectorAll(`#${res}-title`)) {
                     var y = document.getElementById(`${res}-widget-area`).querySelector(`#${res}-widget`);
-                    // if (y.innerHTML == "") {
-                    //     console.log("testing")
-                    //     x.style.display = "flex";
-                    //     document.getElementById(`${value}`).className += (` ${keys}`);
-                    //     y.innerHTML += x.outerHTML;
-                    //     document.getElementById(`${value}`).classList.remove(`${keys}`);
-                    //     // console.log(document.getElementById(`${value}`));
-                    //     x.style.display = "none";
-                    // }
-                    // } else {
-                    //     
-                    // }
                     console.log(x[0].outerHTML);
                     x[0].style.display = "flex";
                     x[0].id = previouskey;
@@ -232,3 +220,33 @@ function closeAllSelect(elmnt) {
 /*if the user clicks anywhere outside the select box,
 then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
+
+
+
+
+
+// resize code
+
+var z = right_menu_window_item;
+var y = right_menu_window_item.querySelector(".widget-content")
+console.log(right_menu_window_item)
+resize_drag_div.addEventListener('mousedown', initDrag, false);
+var startY, startHeight;
+
+function initDrag(e) {
+    startY = e.clientY;
+    startHeight = parseInt(document.defaultView.getComputedStyle(z).height, 10);
+    document.documentElement.addEventListener('mousemove', doDrag, false);
+    document.documentElement.addEventListener('mouseup', stopDrag, false);
+}
+
+function doDrag(e) {
+    z.style.height = (startHeight + e.clientY - startY) + 'px';
+    y.style.height = (startHeight + e.clientY - startY)-28 + 'px';
+    y.style.maxHeight = (startHeight + e.clientY - startY)-28 + 'px';
+}
+
+function stopDrag(e) {
+    document.documentElement.removeEventListener('mousemove', doDrag, false);
+    document.documentElement.removeEventListener('mouseup', stopDrag, false);
+}

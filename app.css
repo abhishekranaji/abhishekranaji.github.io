@@ -94,7 +94,7 @@ h2 {
 
 .card-window {
     background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 6px 8px  rgba(0, 0, 0, 0.18);
+    box-shadow: -4px 4px 4px 0px rgba(0, 0, 0, 0.18);
     border-radius: 4px;
     opacity: 1;
     padding-top: 9px;
@@ -431,6 +431,7 @@ input:checked + .toggle-widget-slider:before {
     user-select: none;
     width: fit-content;
     display: flex;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.18);
     border-radius: 5px;
     background-color: #FFFFFF;
     padding-left: 10px;
@@ -455,3 +456,28 @@ input:checked + .toggle-widget-slider:before {
   .node_haschild {
       width: 12px;
   }
+
+  /* Scroll bar */
+::-webkit-scrollbar {
+    width: 4px;
+    padding-bottom: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #C9C9C9; 
+    border-radius: 4px;
+
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #575757; 
+    border-radius: 4px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(0, 0, 0); 
+  }
+  
