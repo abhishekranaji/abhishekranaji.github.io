@@ -12,22 +12,11 @@
     <title>Document</title>
 </head>
 <body>
-    <div style="display: flex; flex-direction: column; width: 100%;">
+    <div style="display: flex; flex-direction: column; width: 100%; height: 100%;">
         <div id="top_area" style="height: 80px;">
-            <div style="height: 80%; background-color: black; display: flex; flex-direction: row;">
-                <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
-                <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
-                <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
-                <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
-                <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
-                <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
-                <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
-                <!-- <button class="button">SETTINGS</button>
-                <button class="button">SETTINGS</button>
-                <button class="button">SETTINGS</button> -->
-            </div>
+            
         </div>
-        <div id="center_row" style=" flex: 1; display: flex; height: 580px">
+        <div id="center_row" style=" flex: 1; display: flex; height: 100%;">
             <div id="left_area" style="width: 80px; z-index: 5;">
                 <div id="scene_data" style="display: flex; flex-direction: row;"></div>
             </div>
@@ -54,7 +43,7 @@
             <div class="resize-div" style="display: flex; flex-direction: column; width: 100%; max-height: 100%; align-items: center; flex: none; ">
                 <div style="flex: 1">
                     <button class="right-window-button">
-                        <img src="assests\info-con.svg" class="align-center" style="margin: auto;"></img>
+                        <img src="assests\info-con.svg" class="align-center" style="margin: auto; z-index: 2000;"></img>
                     </button>
                 </div>
                 <div class="resize-drag noselect" style="display: none; margin-bottom: 10px; cursor: s-resize;">___</div>
@@ -116,7 +105,7 @@
 
     <!-- Target widget template -->
     <div id= "target-widget-template" style="display: none;">
-        <div class= "card-window" style="display:flex; flex-direction: column; margin-top: 4px; height: 100%; width: 80%;">
+        <div class= "card-window" style="display:flex; flex-direction: column; margin-top: 4px;">
             <div class="target-widget-left-area" style="width: 101px;" >
                 <h2>Target</h2>
                 <p class="any-info"></p>
@@ -259,6 +248,15 @@
                 <img src="assests\home.svg" class="align-center" style="margin: auto; width: 20px;"></img>
             </button>
         </div> 
+    </div>
+
+    <!-- Top Menu Template -->
+    <div id="top-menu-template" style="display: none;">
+        <div style="height: 80%;background-color: white;display: flex;flex-direction: row;box-shadow: 0px 0px 6px 1px rgb(0 0 0 / 73%);z-index: 4000;border-bottom: .1px solid #000000;">
+            <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
+            <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
+            <button class="top-button" style="margin-top: 15px;">SETTINGS</button>
+        </div>
     </div>
 
     <!-- Bottom Menu target select buttonTemplate -->

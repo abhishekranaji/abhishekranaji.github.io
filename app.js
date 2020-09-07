@@ -37,13 +37,9 @@ var create_right_window_item = (id, button_text, title) => {
     // var z = right_menu_window_item;
     
     right_btn.onclick = function(e){
-        toggle_menu_drag_display(right_menu_window_item.querySelector(".widget-area"), resize_div)
+        toggle_menu_drag_display(right_menu_window_item.querySelector(".widget-area"), resize_div, "right_menu_slide_in 200ms ease-in-out")
         let card_windows = (right_menu_window_item.querySelectorAll(".card-window"))
-        // get original height of widget area
-        var original_height = 0;
-        for (let i=0; i<card_windows.length; i++) {
-            original_height = original_height + card_windows[i].clientHeight + 2;
-        }
+        
         var y = right_menu_window_item.querySelector(".widget-content")
         resize_drag_div.addEventListener('mousedown', initDrag, false);
         var startY, startHeight;
@@ -57,14 +53,11 @@ var create_right_window_item = (id, button_text, title) => {
         function doDrag(e) {
             resize_div.style.height = (startHeight + e.clientY - startY) + 'px';
             y.style.height = (startHeight + e.clientY - startY)-38 + 'px';
-            // resize_div.style.maxHeight = (startHeight + e.clientY - startY) + 'px';
-            
             y.style.maxHeight = startHeight -38 + 'px';
             resize_div.style.maxHeight = startHeight + 'px';
         }
 
         function stopDrag(e) {
-            // y.style.maxHeight = (startHeight + e.clientY - startY)-38 + 'px';
             document.documentElement.removeEventListener('mousemove', doDrag, false);
             document.documentElement.removeEventListener('mouseup', stopDrag, false);
         }
@@ -77,10 +70,9 @@ var add_to_right_window_item = (wid, item) => {
     by_id(wid).querySelector(".widget-content").append(item)
 }
 
-var toggle_menu_drag_display = (obj, resize_div) => {
+var toggle_menu_drag_display = (obj, resize_div, animation_in) => {
     // qry(q).getAttribute
     let drag_comp = resize_div.querySelector(".resize-drag");
-    console.log(drag_comp)
     if(obj.style.display === "none"){
         let display_type = obj.getAttribute("disp_type")
         if(display_type === null)
@@ -88,9 +80,11 @@ var toggle_menu_drag_display = (obj, resize_div) => {
         obj.style.display = display_type
         obj.style.height = "auto"
         resize_div.style.height = null
+        if (animation_in) { obj.style.animation = animation_in; }
         if (obj.querySelector(".widget-content")) {
             if(obj.querySelector(".widget-content").style.display !== "none") {
                 drag_comp.style.display = display_type
+                // obj.querySelector(".widget-content").style.display = "none";
             }
         }else {
             drag_comp.style.display = display_type
@@ -130,17 +124,17 @@ var toggle_menu_drag_display = (obj, resize_div) => {
 //     }
 // }
 
-var toggle_menu_display = (obj) => {
+var toggle_menu_display = (obj, animation_in, animation_out) => {
     if(obj.style.opacity === "0"){
         let display_type = obj.getAttribute("disp_type")
         if(display_type === null)
             display_type = "1"
         obj.setAttribute("disp_type", display_type)
-        obj.style.animation = "bottom_menu_slide_in 1s"
+        if (animation_in) { obj.style.animation = animation_in; }
         obj.style.opacity = display_type      
     }else{
         obj.setAttribute("disp_type", obj.style.opacity)
-        obj.style.animation = "bottom_menu_slide_out 1s"
+        if(animation_out) {obj.style.animation = animation_out; }
         obj.style.opacity = "0"
     }
 }
@@ -199,11 +193,11 @@ var target_widget = (tarid) => {
     bottom_menu_select.id = `${tarid}-target-widget-select-botton-menu`
     widget_item.querySelector("[name = select]").onclick = function(e){
         if (by_id("bottom_area").querySelector("#"+bottom_menu_select.id) === null) {
-            bottom_menu_select.style.animation = "bottom_menu_slide_in 1s"
+            bottom_menu_select.style.animation = "bottom_menu_slide_in 400ms"
             bottom_menu_select.style.opacity = "1";
             by_id("bottom_area").appendChild(bottom_menu_select);
         } else {
-            toggle_menu_display(by_id(bottom_menu_select.id));
+            toggle_menu_display(by_id(bottom_menu_select.id),"bottom_menu_slide_in 400ms", "bottom_menu_slide_out 600ms");
         }
     }
     return widget_item
@@ -277,7 +271,6 @@ var tree_add_nodes = (trid, pid, nodes_array) => {
     }
     
 }
-// console.log(trees)
 var searchTree = (data, parent) => {
     for(i=0; i < data.length; i ++){
         if (data[i].id === parent){
@@ -355,7 +348,7 @@ var add_ui_for_tree = (tid, uid) => {
     container.style.opacity = 0;
     by_id(uid).appendChild(button);
     button.onclick = function(e){
-        toggle_menu_display(container)
+        toggle_menu_display(container,"left_menu_slide_in 400ms","left_menu_slide_out 400ms")
     }
     by_id(uid).appendChild(container);
     let a = trees[tid];
@@ -368,31 +361,16 @@ var add_ui_for_tree = (tid, uid) => {
     create_tree_div(container, data);
     tree_div_toggle();
 }
+// Add top menu
+var create_top_menu = () => {
+    let top_menu = template_2_dom("top-menu-template");
+    return top_menu
+}
 
-
-
+by_id("top_area").appendChild(create_top_menu())
 tree("scene_tree",[d])
 add_ui_for_tree("scene_tree", "scene_data");
 tree_add_nodes("scene_tree", "d5", [{id:"d6", text: "6", type:"light"}]);
-// let container = document.createElement("div");
-// append_tree_div_to_ui(container, trees["left_menu"].data, "left_area")
-// console.log(create_tree_div(container, trees["left_menu"].data))
-
-// tree_add_ui_id("top_left", "left_menu", {type:"grouped"})
-// tree_add_ui_id("bottom_left", "left_menu", {type:"grouped"})
-// console.log(trees)
-// {
-//     id:"",
-//     text:"",
-//     type:"",
-//     has_children: boolean,
-//     children:[]
-// }
-
-// tree_add_ui(uid, tid)
-
-// tree("left_menu",["ground","direction"])
-// tree_add_node("left_menu","ground",{"dcsac":"cdsvdf"});
 
 let item = color_widget("info","#000000")
 let item1 = color_widget("material","#ffffff")
