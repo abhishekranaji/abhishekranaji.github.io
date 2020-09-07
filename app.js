@@ -29,14 +29,44 @@ var create_right_window_item = (id, button_text, title) => {
     // get template
     let right_menu_window_item = template_2_dom("right-window-template");
     right_menu_window_item.id = `${id}`;
-    // let resize_drag_div = right_menu_window_item.querySelector(".resize-drag");
+    let resize_drag_div = right_menu_window_item.querySelector(".resize-drag");
     right_menu_window_item.querySelector(".resize-div").id = `${id}-resize`;
     let right_btn = right_menu_window_item.querySelector(".right-window-button");
+    let resize_div = right_menu_window_item.querySelector(".resize-div");
     // right_btn.setAttribute("id", `${id}-button`);
+    // var z = right_menu_window_item;
+    
     right_btn.onclick = function(e){
-        toggle_display(right_menu_window_item.querySelector(".widget-area"))
+        toggle_menu_drag_display(right_menu_window_item.querySelector(".widget-area"), resize_div)
+        let card_windows = (right_menu_window_item.querySelectorAll(".card-window"))
+        // get original height of widget area
+        var original_height = 0;
+        for (let i=0; i<card_windows.length; i++) {
+            original_height = original_height + card_windows[i].clientHeight + 2;
+        }
+        var y = right_menu_window_item.querySelector(".widget-content")
+        resize_drag_div.addEventListener('mousedown', initDrag, false);
+        var startY, startHeight;
+        function initDrag(e) {
+            startY = e.clientY;
+            startHeight = parseInt(document.defaultView.getComputedStyle(resize_div).height, 10);
+            document.documentElement.addEventListener('mousemove', doDrag, false);
+            document.documentElement.addEventListener('mouseup', stopDrag, false);
+        }
+
+        function doDrag(e) {
+            resize_div.style.height = (startHeight + e.clientY - startY) + 'px';
+            y.style.height = (startHeight + e.clientY - startY)-38 + 'px';
+            y.style.maxHeight = original_height -25 + 'px';
+            resize_div.style.maxHeight = original_height +28 + 'px';
+        }
+
+        function stopDrag(e) {
+            document.documentElement.removeEventListener('mousemove', doDrag, false);
+            document.documentElement.removeEventListener('mouseup', stopDrag, false);
+        }
     }
-    right_menu_window_item.querySelector("[role='title']").onclick = () => {toggle_display(right_menu_window_item.querySelector(".widget-content"))}
+    right_menu_window_item.querySelector("[role='title']").onclick = () => {toggle_menu_drag_display(right_menu_window_item.querySelector(".widget-content"), resize_div)}
     by_id("right_area").appendChild(right_menu_window_item);
 }
 
@@ -44,18 +74,58 @@ var add_to_right_window_item = (wid, item) => {
     by_id(wid).querySelector(".widget-content").append(item)
 }
 
-var toggle_display = (obj) => {
+// var toggle_display = (obj, drag_comp) => {
+//     // qry(q).getAttribute
+//     if(obj.style.display === "none"){
+//         let display_type = obj.getAttribute("disp_type")
+//         if(display_type === null)
+//             display_type = ""
+//         obj.style.display = display_type
+//         obj.style.transition = "opacity 5s linear"
+//         drag_comp.style.display = display_type
+        
+//     }else{
+//         obj.setAttribute("disp_type", obj.style.display)
+//         obj.style.display = "none"
+//         drag_comp.style.display = "none"
+//         obj.style.transition = "opacity 5s ease-in-out 5s"
+//     }
+// }
+var toggle_menu_drag_display = (obj, resize_div) => {
     // qry(q).getAttribute
-    if(obj.style.display === "none"){
+    let drag_comp = resize_div.querySelector(".resize-drag");
+    if(obj.style.opacity === "0"){
         let display_type = obj.getAttribute("disp_type")
         if(display_type === null)
-            display_type = ""
-        obj.style.display = display_type
+            display_type = "1"
+        obj.style.opacity = display_type
+        obj.style.height = "auto"
+        // obj.style.transition = "all 1s ease-in-out 0s"
+        drag_comp.style.display = display_type
+        
     }else{
-        obj.setAttribute("disp_type", obj.style.display)
-        obj.style.display = "none"
+        obj.setAttribute("disp_type", obj.style.opacity)
+        obj.style.opacity = "0"
+        drag_comp.style.display = "none"
+        resize_div.style.height = null
+        // obj.style.transition = "all 1s ease-in-out 0s"
+        obj.style.height = "0"
     }
-    
+}
+
+var toggle_menu_display = (obj) => {
+    if(obj.style.opacity === "0"){
+        let display_type = obj.getAttribute("disp_type")
+        if(display_type === null)
+            display_type = "1"
+        obj.setAttribute("disp_type", display_type)
+        obj.style.opacity = display_type
+        // obj.style.transition = "all 1s ease-in-out 0s"        
+    }else{
+        obj.setAttribute("disp_type", obj.style.opacity)
+        obj.style.opacity = "0"
+        // obj.style.transition = "all 1s ease-in-out 0s"
+    }
 }
 
 
@@ -106,7 +176,18 @@ var visibility_widget = (vid, vval) => {
 
 var target_widget = (tarid) => {
     let widget_item = template_2_dom("target-widget-template");
+    let bottom_menu_select = template_2_dom("bottom-menu-target-select-template")
+    console.log()
     widget_item.id = `${tarid}-target-widget`;
+    bottom_menu_select.id = `${tarid}-select-botton-menu`
+    widget_item.querySelector("[name = select]").onclick = function(e){
+        if (by_id("bottom_area").querySelector("#"+bottom_menu_select.id) === null) {
+            bottom_menu_select.style.opacity = "1";
+            by_id("bottom_area").appendChild(bottom_menu_select);
+        } else {
+            toggle_menu_display(by_id(bottom_menu_select.id));
+        }
+    }
     return widget_item
 }
 
@@ -161,7 +242,6 @@ var tree = (trid, pdata) => {
     trees[trid] = {id: trid, data: data};
 }
 var tree_add_nodes = (trid, pid, nodes_array) => {
-    console.log((trid)) 
     let data = trees[trid].data;
     let p = searchTree(data, pid)
     if(p.children){
@@ -251,8 +331,14 @@ var tree_div_toggle = () => {
 
 var container_divs = new WeakMap()
 var add_ui_for_tree = (tid, uid) => {
+    let button = template_2_dom("button-template");
     let container = document.createElement("div");
     container.setAttribute("class","tree_ui_container");
+    container.style.opacity = 0;
+    by_id(uid).appendChild(button);
+    button.onclick = function(e){
+        toggle_menu_display(container)
+    }
     by_id(uid).appendChild(container);
     let a = trees[tid];
     if(a.ui === undefined){
@@ -270,7 +356,6 @@ var add_ui_for_tree = (tid, uid) => {
 tree("scene_tree",[d])
 add_ui_for_tree("scene_tree", "scene_data");
 tree_add_nodes("scene_tree", "d5", [{id:"d6", text: "6", type:"light"}]);
-console.log(trees)
 // let container = document.createElement("div");
 // append_tree_div_to_ui(container, trees["left_menu"].data, "left_area")
 // console.log(create_tree_div(container, trees["left_menu"].data))

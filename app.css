@@ -7,7 +7,7 @@ body {
 }
 
 h1 {
-    font-family: Do Hyeon;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 0.4px;
@@ -22,7 +22,7 @@ h1 {
 }
 
 h2 {
-    font-family: Do Hyeon;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 0.4px;
@@ -220,10 +220,10 @@ input[type=number] {
     box-sizing: border-box;
     border: none;
     margin-left: 18px;
-    border-bottom: .5px solid #D0D0D0;
+    /* border-bottom: .5px solid #D0D0D0; */
     text-align: center;
     background-color: transparent;
-    font: normal normal normal 20px/13px Calibri;
+    font: normal normal normal 28px/13px Calibri;
     letter-spacing: 0px;
     color: #949494;
   }
@@ -314,7 +314,7 @@ input:checked + .toggle-widget-slider:before {
   /* Input[text] */
   input[type=text] {
     padding-bottom: 4px;
-    width: 25px;
+    width: 38px;
     height: 15px;
     box-sizing: border-box;
     border: none;
@@ -410,14 +410,14 @@ input:checked + .toggle-widget-slider:before {
   }
 
   .node_toggle_non_active::before {
-    content: "\002B"!important;
+    content: "\002D"!important;
     color: black;
     display: inline-block;
     margin-right: 6px;
   }
 
   .node_toggle::before {
-    content: "\002D ";
+    content: "\002B ";
     color: black;
     display: inline-block;
     margin-right: 6px;
@@ -445,7 +445,7 @@ input:checked + .toggle-widget-slider:before {
   }
   
   .tree_ui_container {
-      margin-left: 65px;
+      margin-left: -15px;
       margin-top: 5px;
   }
 
@@ -479,5 +479,56 @@ input:checked + .toggle-widget-slider:before {
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(0, 0, 0); 
+  }
+
+  /* remove selection */
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  .button {
+    width: fit-content;
+    cursor: pointer;
+    height: 16px;
+    margin-top: 3px;
+    margin-left: 8px;
+    font: normal normal normal 10px/9px 'Open Sans', sans-serif;
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+    display: inline-block;
+    text-align: center;
+    background: #4285f4 0% 0% no-repeat padding-box;
+    /* box-shadow: 0px 2px 1px #00000029; */
+    border: 1px solid #000000;
+    border-radius: 2px;
+    opacity: 1;
+    
+  }
+
+  .top-button {
+    width: fit-content;
+    cursor: pointer;
+    height: 40px;
+    margin-top: 3px;
+    margin-left: 8px;
+    font: normal normal normal 15px/9px 'Open Sans', sans-serif;
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+    display: inline-block;
+    text-align: center;
+    background: #4285f4 0% 0% no-repeat padding-box;
+    /* box-shadow: 0px 2px 1px #00000029; */
+    border: 1px solid #000000;
+    border-radius: 2px;
+    opacity: 1;
+    
   }
   

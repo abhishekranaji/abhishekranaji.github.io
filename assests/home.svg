@@ -1,0 +1,10 @@
+<svg id="Component_36_1" data-name="Component 36 – 1" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+  <g id="Component_3" data-name="Component 3" transform="translate(4 4)">
+    <path id="Path_4" data-name="Path 4" d="M-12296.435,6279.3v6.133h2.492v-4.267h2.847v4.267h2.728V6279.3" transform="translate(12298.834 -6273.633)" fill="none" stroke="#707070" stroke-width="1"/>
+    <path id="Path_5" data-name="Path 5" d="M-12298.833,6279.3l6.063-6.667,6.8,6.667" transform="translate(12298.833 -6272.633)" fill="none" stroke="#707070" stroke-width="1"/>
+  </g>
+  <g id="Ellipse_8" data-name="Ellipse 8" fill="none" stroke="#707070" stroke-width="1.5">
+    <circle cx="10.5" cy="10.5" r="10.5" stroke="none"/>
+    <circle cx="10.5" cy="10.5" r="9.75" fill="none"/>
+  </g>
+</svg>
