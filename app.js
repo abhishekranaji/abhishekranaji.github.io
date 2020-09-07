@@ -49,7 +49,7 @@ var create_right_window_item = (id, button_text, title) => {
         var startY, startHeight;
         function initDrag(e) {
             startY = e.clientY;
-            startHeight = parseInt(document.defaultView.getComputedStyle(resize_div).height, 10);
+            startHeight = parseInt(document.defaultView.getComputedStyle(resize_div).height, null);
             document.documentElement.addEventListener('mousemove', doDrag, false);
             document.documentElement.addEventListener('mouseup', stopDrag, false);
         }
@@ -57,11 +57,14 @@ var create_right_window_item = (id, button_text, title) => {
         function doDrag(e) {
             resize_div.style.height = (startHeight + e.clientY - startY) + 'px';
             y.style.height = (startHeight + e.clientY - startY)-38 + 'px';
-            y.style.maxHeight = original_height -25 + 'px';
-            resize_div.style.maxHeight = original_height +28 + 'px';
+            // resize_div.style.maxHeight = (startHeight + e.clientY - startY) + 'px';
+            
+            y.style.maxHeight = startHeight -38 + 'px';
+            resize_div.style.maxHeight = startHeight + 'px';
         }
 
         function stopDrag(e) {
+            // y.style.maxHeight = (startHeight + e.clientY - startY)-38 + 'px';
             document.documentElement.removeEventListener('mousemove', doDrag, false);
             document.documentElement.removeEventListener('mouseup', stopDrag, false);
         }
@@ -74,44 +77,58 @@ var add_to_right_window_item = (wid, item) => {
     by_id(wid).querySelector(".widget-content").append(item)
 }
 
-// var toggle_display = (obj, drag_comp) => {
-//     // qry(q).getAttribute
-//     if(obj.style.display === "none"){
-//         let display_type = obj.getAttribute("disp_type")
-//         if(display_type === null)
-//             display_type = ""
-//         obj.style.display = display_type
-//         obj.style.transition = "opacity 5s linear"
-//         drag_comp.style.display = display_type
-        
-//     }else{
-//         obj.setAttribute("disp_type", obj.style.display)
-//         obj.style.display = "none"
-//         drag_comp.style.display = "none"
-//         obj.style.transition = "opacity 5s ease-in-out 5s"
-//     }
-// }
 var toggle_menu_drag_display = (obj, resize_div) => {
     // qry(q).getAttribute
     let drag_comp = resize_div.querySelector(".resize-drag");
-    if(obj.style.opacity === "0"){
+    console.log(drag_comp)
+    if(obj.style.display === "none"){
         let display_type = obj.getAttribute("disp_type")
         if(display_type === null)
-            display_type = "1"
-        obj.style.opacity = display_type
+            display_type = ""
+        obj.style.display = display_type
         obj.style.height = "auto"
-        // obj.style.transition = "all 1s ease-in-out 0s"
-        drag_comp.style.display = display_type
-        
-    }else{
-        obj.setAttribute("disp_type", obj.style.opacity)
-        obj.style.opacity = "0"
-        drag_comp.style.display = "none"
         resize_div.style.height = null
-        // obj.style.transition = "all 1s ease-in-out 0s"
-        obj.style.height = "0"
+        if (obj.querySelector(".widget-content")) {
+            if(obj.querySelector(".widget-content").style.display !== "none") {
+                drag_comp.style.display = display_type
+            }
+        }else {
+            drag_comp.style.display = display_type
+        }      
+    }else{
+        obj.setAttribute("disp_type", obj.style.display)
+        obj.style.display = "none"
+        resize_div.style.height = "54px"
+        if (obj.querySelector(".widget-content")) {
+            if(obj.querySelector(".widget-content").style.display !== "none") {
+                drag_comp.style.display = "none"
+            }
+        } else {
+            drag_comp.style.display = "none"
+        }
     }
 }
+// var toggle_menu_drag_display = (obj, resize_div) => {
+//     // qry(q).getAttribute
+//     let drag_comp = resize_div.querySelector(".resize-drag");
+//     let widget_content = obj.querySelector(".widget-content");
+//     console.log()
+//     if(obj.style.opacity === "0"){
+//         let display_type = obj.getAttribute("disp_type")
+//         if(display_type === null)
+//             display_type = "1"
+//         obj.style.opacity = display_type
+//         obj.style.height = "auto"
+//             // obj.style.transition = "all 1s ease-in-out 0s"
+//         drag_comp.style.display = display_type
+//     }else{
+//         obj.setAttribute("disp_type", obj.style.opacity)
+//         obj.style.opacity = "0"
+//         resize_div.style.height = null
+//         obj.style.height = "0"
+//         drag_comp.style.display = "none"
+//     }
+// }
 
 var toggle_menu_display = (obj) => {
     if(obj.style.opacity === "0"){
@@ -119,12 +136,12 @@ var toggle_menu_display = (obj) => {
         if(display_type === null)
             display_type = "1"
         obj.setAttribute("disp_type", display_type)
-        obj.style.opacity = display_type
-        // obj.style.transition = "all 1s ease-in-out 0s"        
+        obj.style.animation = "bottom_menu_slide_in 1s"
+        obj.style.opacity = display_type      
     }else{
         obj.setAttribute("disp_type", obj.style.opacity)
+        obj.style.animation = "bottom_menu_slide_out 1s"
         obj.style.opacity = "0"
-        // obj.style.transition = "all 1s ease-in-out 0s"
     }
 }
 
@@ -179,9 +196,10 @@ var target_widget = (tarid) => {
     let bottom_menu_select = template_2_dom("bottom-menu-target-select-template")
     console.log()
     widget_item.id = `${tarid}-target-widget`;
-    bottom_menu_select.id = `${tarid}-select-botton-menu`
+    bottom_menu_select.id = `${tarid}-target-widget-select-botton-menu`
     widget_item.querySelector("[name = select]").onclick = function(e){
         if (by_id("bottom_area").querySelector("#"+bottom_menu_select.id) === null) {
+            bottom_menu_select.style.animation = "bottom_menu_slide_in 1s"
             bottom_menu_select.style.opacity = "1";
             by_id("bottom_area").appendChild(bottom_menu_select);
         } else {
