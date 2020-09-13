@@ -337,7 +337,7 @@ var add_ui_for_tree = (tid, uid) => {
     container.style.opacity = 0;
     by_id(uid).appendChild(button);
     button.onclick = function(e){
-        toggle_menu_display(container,"left_menu_slide_in 400ms","left_menu_slide_out 400ms")
+        toggle_menu_display(container,"left_menu_slide_in 100ms","left_menu_slide_out 100ms")
     }
     by_id(uid).appendChild(container);
     let a = trees[tid];

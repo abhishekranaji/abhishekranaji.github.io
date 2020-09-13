@@ -563,8 +563,8 @@ input:checked + .toggle-widget-slider:before {
   }
 
   @keyframes left_menu_slide_out {
-    from {margin-left: -40px;}
-    to {margin-left: -10px;}
+    from {margin-left: -15px;}
+    to {margin-left: -60px;}
   }
 
   @keyframes right_menu_slide_in {
