@@ -397,7 +397,7 @@ outline: none;
   
   /*point the arrow upwards when the select box is open (active):*/
   .select-selected.select-arrow-active:after {
-    border-color: transparent transparent #575757) transparent;
+    border-color: transparent transparent #575757 transparent;
     top: 4px;
   }
   
