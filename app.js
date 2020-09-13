@@ -39,22 +39,22 @@ var create_right_window_item = (id, button_text, title) => {
     right_btn.onclick = function(e){
         toggle_menu_drag_display(right_menu_window_item.querySelector(".widget-area"), resize_div, "right_menu_slide_in 200ms ease-in-out")
         let card_windows = (right_menu_window_item.querySelectorAll(".card-window"))
-        
         var y = right_menu_window_item.querySelector(".widget-content")
         resize_drag_div.addEventListener('mousedown', initDrag, false);
         var startY, startHeight;
         function initDrag(e) {
             startY = e.clientY;
             startHeight = parseInt(document.defaultView.getComputedStyle(resize_div).height, null);
+            console.log(startY)
             document.documentElement.addEventListener('mousemove', doDrag, false);
             document.documentElement.addEventListener('mouseup', stopDrag, false);
         }
 
         function doDrag(e) {
-            resize_div.style.height = (startHeight + e.clientY - startY) + 'px';
-            y.style.height = (startHeight + e.clientY - startY)-38 + 'px';
-            y.style.maxHeight = startHeight -38 + 'px';
-            resize_div.style.maxHeight = startHeight + 'px';
+            resize_div.style.height = (startHeight + e.clientY - startY) + 50 + 'px';
+            y.style.height = (startHeight + e.clientY - startY) + 'px';
+            y.style.maxHeight = startHeight - 50 + 'px';
+            resize_div.style.maxHeight = startHeight  + 'px';
         }
 
         function stopDrag(e) {
@@ -84,7 +84,6 @@ var toggle_menu_drag_display = (obj, resize_div, animation_in) => {
         if (obj.querySelector(".widget-content")) {
             if(obj.querySelector(".widget-content").style.display !== "none") {
                 drag_comp.style.display = display_type
-                // obj.querySelector(".widget-content").style.display = "none";
             }
         }else {
             drag_comp.style.display = display_type
@@ -102,40 +101,27 @@ var toggle_menu_drag_display = (obj, resize_div, animation_in) => {
         }
     }
 }
-// var toggle_menu_drag_display = (obj, resize_div) => {
-//     // qry(q).getAttribute
-//     let drag_comp = resize_div.querySelector(".resize-drag");
-//     let widget_content = obj.querySelector(".widget-content");
-//     console.log()
-//     if(obj.style.opacity === "0"){
-//         let display_type = obj.getAttribute("disp_type")
-//         if(display_type === null)
-//             display_type = "1"
-//         obj.style.opacity = display_type
-//         obj.style.height = "auto"
-//             // obj.style.transition = "all 1s ease-in-out 0s"
-//         drag_comp.style.display = display_type
-//     }else{
-//         obj.setAttribute("disp_type", obj.style.opacity)
-//         obj.style.opacity = "0"
-//         resize_div.style.height = null
-//         obj.style.height = "0"
-//         drag_comp.style.display = "none"
-//     }
-// }
 
 var toggle_menu_display = (obj, animation_in, animation_out) => {
     if(obj.style.opacity === "0"){
         let display_type = obj.getAttribute("disp_type")
         if(display_type === null)
             display_type = "1"
+        display_type = "1"
         obj.setAttribute("disp_type", display_type)
-        if (animation_in) { obj.style.animation = animation_in; }
-        obj.style.opacity = display_type      
+        if (animation_in) { obj.style.animation = animation_in;
+            obj.style.opacity = display_type;
+            obj.addEventListener("animationend", function changeOpacity() {obj.style.opacity = display_type})
+        }else {
+            obj.style.opacity = display_type;
+        }        
     }else{
-        obj.setAttribute("disp_type", obj.style.opacity)
-        if(animation_out) {obj.style.animation = animation_out; }
-        obj.style.opacity = "0"
+        obj.setAttribute("disp_type", 0)
+        if(animation_out) {obj.style.animation = animation_out;
+             obj.addEventListener("animationend", function changeOpacity() {obj.style.opacity = 0})
+        }else {
+            obj.style.opacity = 0
+        }
     }
 }
 
@@ -197,8 +183,11 @@ var target_widget = (tarid) => {
             bottom_menu_select.style.opacity = "1";
             by_id("bottom_area").appendChild(bottom_menu_select);
         } else {
-            toggle_menu_display(by_id(bottom_menu_select.id),"bottom_menu_slide_in 400ms", "bottom_menu_slide_out 600ms");
+            toggle_menu_display(by_id(bottom_menu_select.id),"bottom_menu_slide_in 100ms", "bottom_menu_slide_out 100ms");
         }
+    }
+    widget_item.querySelector("[name = change]").onclick = function(e){
+        toggle_menu_display(by_id("change"));
     }
     return widget_item
 }
@@ -402,3 +391,256 @@ add_to_right_window_item("material", item1)
 add_to_right_window_item("material", item5)
 add_to_right_window_item("material", item6)
 add_to_right_window_item("material", item7)
+
+
+var e = {
+    ui : 
+        {
+            height : "100px",
+            width : "150px",
+            top : "100px",
+            left : "100px"
+        }
+}
+var modal_window = (wid, ui_data) => {
+    let data;
+    if (ui_data === undefined) {
+        data = {};
+    }else if(Array.isArray(ui_data)) {
+        data = ui_data[0]
+    }
+    modal_windows[wid] = data;
+}
+var create_modal_window = (wid, title) => {
+    let modal_window_template = template_2_dom("modal-window-template");
+    modal_window_template.id = wid;
+    modal_window_template.querySelector(".modal-window-title").append(title);
+    modal_window_template.style.height = modal_windows[wid].ui.height;
+    modal_window_template.style.width = modal_windows[wid].ui.width;
+    modal_window_template.style.top = modal_windows[wid].ui.top;
+    modal_window_template.style.left = modal_windows[wid].ui.left;
+    by_id("center_area").append(modal_window_template);
+    drag_resizable_modal_window(modal_window_template, by_id("ghost_window"), wid)
+}
+
+var drag_resizable_modal_window = (modal_window, ghostWindow, wid) => {
+    var minWidth = 150;
+    var minHeight = 100;
+
+    // Thresholds
+    var FULLSCREEN_MARGINS = -10;
+    var MARGINS = 4;
+
+    // End of what's configurable.
+    var clicked = null;
+    var onRightEdge, onBottomEdge, onLeftEdge, onTopEdge;
+
+    var rightScreenEdge, bottomScreenEdge;
+
+
+    var b, x, y;
+
+    var redraw = false;
+
+    var pane = modal_window;
+    var ghostpane = ghostWindow;
+
+    function setBounds(element, x, y, w, h) {
+        element.style.left = x + 'px';
+        element.style.top = y + 'px';
+        element.style.width = w + 'px';
+        element.style.height = h + 'px';
+    }
+
+    function hintHide() {
+    setBounds(ghostpane, b.left, b.top, b.width, b.height);
+    ghostpane.style.opacity = 0;
+    }
+
+
+    // Mouse events
+    pane.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+
+    // Touch events	
+    pane.addEventListener('touchstart', onTouchDown);
+    document.addEventListener('touchmove', onTouchMove);
+    document.addEventListener('touchend', onTouchEnd);
+
+
+    function onTouchDown(e) {
+    onDown(e.touches[0]);
+    e.preventDefault();
+    }
+
+    function onTouchMove(e) {
+    onMove(e.touches[0]);		
+    }
+
+    function onTouchEnd(e) {
+    if (e.touches.length ==0) onUp(e.changedTouches[0]);
+    }
+
+    function onMouseDown(e) {
+    onDown(e);
+    e.preventDefault();
+    }
+
+    function onDown(e) {
+    calc(e);
+
+    var isResizing = onRightEdge || onBottomEdge || onTopEdge || onLeftEdge;
+
+    clicked = {
+        x: x,
+        y: y,
+        cx: e.clientX,
+        cy: e.clientY,
+        w: b.width,
+        h: b.height,
+        isResizing: isResizing,
+        isMoving: !isResizing && canMove(),
+        onTopEdge: onTopEdge,
+        onLeftEdge: onLeftEdge,
+        onRightEdge: onRightEdge,
+        onBottomEdge: onBottomEdge
+    };
+    }
+
+    function canMove() {
+    return x > 0 && x < b.width && y > 0 && y < b.height
+    && y < 30;
+    }
+
+    function calc(e) {
+    b = pane.getBoundingClientRect();
+    x = e.clientX - b.left;
+    y = e.clientY - b.top;
+
+    onTopEdge = y < MARGINS;
+    onLeftEdge = x < MARGINS;
+    onRightEdge = x >= b.width - MARGINS;
+    onBottomEdge = y >= b.height - MARGINS;
+
+    rightScreenEdge = window.innerWidth - MARGINS;
+    bottomScreenEdge = window.innerHeight - MARGINS;
+    }
+
+    var e;
+
+    function onMove(ee) {
+    calc(ee);
+
+    e = ee;
+
+    redraw = true;
+
+    }
+
+    function animate() {
+
+    requestAnimationFrame(animate);
+
+    if (!redraw) return;
+
+    redraw = false;
+
+    if (clicked && clicked.isResizing) {
+
+        if (clicked.onRightEdge) {pane.style.width = Math.max(x, minWidth) + 'px'; modal_windows[wid].ui.width = pane.style.width;}
+        if (clicked.onBottomEdge) {pane.style.height = Math.max(y, minHeight) + 'px'; modal_windows[wid].ui.height = pane.style.height;}
+
+        if (clicked.onLeftEdge) {
+        var currentWidth = Math.max(clicked.cx - e.clientX  + clicked.w, minWidth);
+        if (currentWidth > minWidth) {
+            pane.style.width = currentWidth + 'px';
+            pane.style.left = e.clientX + 'px';	
+            modal_windows[wid].ui.left = pane.style.left;
+            modal_windows[wid].ui.width = pane.style.width;
+        }
+        }
+
+        if (clicked.onTopEdge) {
+        var currentHeight = Math.max(clicked.cy - e.clientY  + clicked.h, minHeight);
+        if (currentHeight > minHeight) {
+            pane.style.height = currentHeight + 'px';
+            pane.style.top = e.clientY + 'px';
+            modal_windows[wid].ui.top = pane.style.top;
+            modal_windows[wid].ui.height = pane.style.height;
+        }
+        }
+
+        hintHide();
+
+        return;
+    }
+
+    if (clicked && clicked.isMoving) {
+
+        if (b.top < FULLSCREEN_MARGINS || b.left < FULLSCREEN_MARGINS || b.right > window.innerWidth - FULLSCREEN_MARGINS || b.bottom > window.innerHeight - FULLSCREEN_MARGINS) {
+        // hintFull();
+        setBounds(ghostpane, 0, 0, window.innerWidth, window.innerHeight);
+        ghostpane.style.opacity = 0.2;
+        } else if (b.top < MARGINS) {
+        // hintTop();
+        setBounds(ghostpane, 0, 0, window.innerWidth, window.innerHeight / 2);
+        ghostpane.style.opacity = 0.2;
+        } else if (b.left < MARGINS) {
+        // hintLeft();
+        setBounds(ghostpane, 0, 0, window.innerWidth / 2, window.innerHeight);
+        ghostpane.style.opacity = 0.2;
+        } else if (b.right > rightScreenEdge) {
+        // hintRight();
+        setBounds(ghostpane, window.innerWidth / 2, 0, window.innerWidth / 2, window.innerHeight);
+        ghostpane.style.opacity = 0.2;
+        } else if (b.bottom > bottomScreenEdge) {
+        // hintBottom();
+        setBounds(ghostpane, 0, window.innerHeight / 2, window.innerWidth, window.innerWidth / 2);
+        ghostpane.style.opacity = 0.2;
+        } else {
+        hintHide();
+        }
+        // moving
+        pane.style.top = (e.clientY - clicked.y) + 'px';
+        pane.style.left = (e.clientX - clicked.x) + 'px';
+        modal_windows[wid].ui.top = pane.style.top;
+        modal_windows[wid].ui.left = pane.style.left;
+
+        return;
+    }
+
+    // This code executes when mouse moves without clicking
+
+    // style cursor
+    if (onRightEdge && onBottomEdge || onLeftEdge && onTopEdge) {
+        pane.style.cursor = 'nwse-resize';
+    } else if (onRightEdge && onTopEdge || onBottomEdge && onLeftEdge) {
+        pane.style.cursor = 'nesw-resize';
+    } else if (onRightEdge || onLeftEdge) {
+        pane.style.cursor = 'ew-resize';
+    } else if (onBottomEdge || onTopEdge) {
+        pane.style.cursor = 'ns-resize';
+    } else if (canMove()) {
+        pane.style.cursor = 'move';
+    } else {
+        pane.style.cursor = 'default';
+    }
+    }
+
+    animate();
+
+    function onUp(e) {
+    calc(e);
+    clicked = null;
+    }
+    var close_btn = pane.querySelector(".close");
+    close_btn.onclick = function() {
+        pane.style.opacity = 0;
+    }
+}
+var modal_windows = []
+modal_window("change", [e])
+// array structure
+
+create_modal_window("change", "change");
