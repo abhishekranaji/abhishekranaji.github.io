@@ -115,7 +115,7 @@ function Viewport(data) {
   this.mouseY = 0;
   this.distanceX = 0;
   this.distanceY = 0;
-  this.positionX = 900;
+  this.positionX = 0;
   this.positionY = -7;
   this.torqueX = 0;
   this.torqueY = 0;
@@ -283,10 +283,10 @@ Viewport.prototype.animate = function() {
 }
 var viewport = new Viewport({
   element: document.getElementsByClassName('cube')[0],
-  fps: 20,
+  fps: 30,
   sensivity: .1,
   sensivityFade: .95,
-  speed: .4,
+  speed: .3,
   touchSensivity: 1.5
 });
 
