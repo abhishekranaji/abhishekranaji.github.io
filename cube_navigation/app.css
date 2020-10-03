@@ -51,6 +51,8 @@
     opacity: 0.9;
     height: 400px;
     width: 400px;
+    background-image: url('images/images.jpg');
+    opacity: .1;
     background-color:rgb(255 255 255 / 8%);
     border-radius: 5px;
     border: 3px solid rgb(255 255 255 / 0.02);
