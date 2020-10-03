@@ -1,6 +1,6 @@
 
 
-fetch('http://starlord.hackerearth.com/insta')
+fetch(("http://starlord.hackerearth.com/insta"))
     .then(res => res.json())
     .then((out) => {
         create_ui(out);
