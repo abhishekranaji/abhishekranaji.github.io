@@ -30,3 +30,32 @@ var create_ui = (data) => {
         console.log(image_place.style.backgroundImage)
     }
 }
+
+// Sorting 
+
+by_id("bt_like").onclick = () => {
+    by_id("article-container").innerHTML = ""
+    fetch('http://starlord.hackerearth.com/insta')
+    .then(res => res.json())
+    .then((out) => {
+        if (by_id("article-container").getAttribute("like-sort") !== "undefined") {
+            if (by_id("article-container").getAttribute("like-sort") === "assend") {
+                by_id("article-container").setAttribute("like-sort", "desend");
+                out.sort(function(x, y){
+                    return y.likes - x.likes;
+                })   
+            } else {
+                by_id("article-container").setAttribute("like-sort","assend");
+                out.sort(function(x, y){
+                    return x.likes - y.likes;
+                }) 
+            }
+        }else {
+            by_id("article-container").setAttribute("like-sort", "desend");
+            out.sort(function(x, y){
+                return y.likes - x.likes;
+            })
+        }
+        create_ui(out);
+    }).catch(err => console.error(err));
+}
