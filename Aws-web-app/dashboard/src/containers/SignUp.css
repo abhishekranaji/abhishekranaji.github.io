@@ -1,0 +1,10 @@
+.MuiSvgIcon-fontSizeInherit {
+    font-size: 10px !important;
+}
+.MuiAlert-message {
+    padding: 0 !important;
+}
+.MuiAlert-icon {
+    padding: 2px 0px 2px 4px !important;
+    margin-right: 4px !important;
+}
